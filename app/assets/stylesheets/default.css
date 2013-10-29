@@ -1,0 +1,47 @@
+
+
+
+
+/**** month and year header at top of calendar ****/
+.date_header			{ font-size:16px; font-weight:bold; color:#2272AF; }
+
+/**** color and size of calendar cells.  ****/
+.day_cell				{ background-color:#EDEDED; height:80px; width: 120px; }
+.empty_day_cell			{ background-color:#EEEEEE; height:80px; width: 120px; }
+.today_cell				{ background-color:#FFFFFF; height:80px; width: 120px; }
+.event_border{
+border:#C0C0C0 1px solid;
+}
+
+/**** day number in upper left corner of each cell ****/
+.day_number				{ font-size:12px; font-family:verdana, arial, helvetica; color:#000 }
+
+/**** title_txt is the text for each post on main page ****/
+.title_txt				{ font-size:12px; color:#68727E }
+.title_txt a:link		{
+    color: #2272AF;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 23px;
+    list-style: none outside none;
+    padding: 4px; }
+.title_txt A:active		{ color:#2272AF; }
+.title_txt A:visited	{ color:#2272AF;  }
+.title_txt A:hover		{ color:#6C6C6C; text-decoration:underline; }
+.number_list{
+color:#2272AF;
+font-weight:bold;
+font-size:11px;
+
+}
+/**** time line under title text when event time given ****/
+.time_str				{ font-size:9px; font-family:arial, helvetica }
+
+/**** column headers or days of the week ****/
+.column_header			{ background-color:#2272AF; font-size:12px; color:#FFFFFF; font-weight:bold }
+
+/**** footprint text ****/
+.footprint				{ font-size:10px; font-family:verdana, arial, helvetica; color:#000; font-weight:bold; }
+.footprint A			{ font-size:10px; font-family:verdana, arial, helvetica; color:#00F; font-weight:bold; }
+
+

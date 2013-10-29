@@ -1,0 +1,87 @@
+class NareshesController < ApplicationController
+  # GET /nareshes
+  # GET /nareshes.json
+  def index
+    @nareshes = Naresh.all
+
+  respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @nareshes.map{|naresh| naresh.to_jq_upload } }
+    end
+  end
+
+  # GET /nareshes/1
+  # GET /nareshes/1.json
+  def show
+    @naresh = Naresh.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @naresh }
+    end
+  end
+
+  # GET /nareshes/new
+  # GET /nareshes/new.json
+  def new
+    @naresh = Naresh.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @naresh }
+    end
+  end
+
+  # GET /nareshes/1/edit
+  def edit
+    @naresh = Naresh.find(params[:id])
+  end
+
+  # POST /nareshes
+  # POST /nareshes.json
+  def create
+    @naresh = Naresh.new(params[:naresh])
+
+    respond_to do |format|
+      if @naresh.save
+        format.html {
+          render :json => [@naresh.to_jq_upload].to_json,
+          :content_type => 'text/html',
+          :layout => false
+        }
+        format.json { render json: {files: [@naresh.to_jq_upload]}, status: :created, location: @naresh }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @naresh.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /nareshes/1
+  # PUT /nareshes/1.json
+  def update
+    @naresh = Naresh.find(params[:id])
+
+    respond_to do |format|
+      if @naresh.update_attributes(params[:naresh])
+        format.html { redirect_to @naresh, notice: 'Naresh was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @naresh.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /nareshes/1
+  # DELETE /nareshes/1.json
+  def destroy
+    @naresh = Naresh.find(params[:id])
+    @naresh.destroy
+
+    respond_to do |format|
+      format.html { redirect_to nareshes_url }
+      format.json { head :no_content }
+    end
+  end
+end

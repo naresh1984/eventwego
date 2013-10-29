@@ -1,0 +1,91 @@
+<table id="login" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign='top'><div class="box1">
+      <table width="500" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="signuphead">Change your password</td>
+        </tr>
+        <tr>
+          <td><table width="530" border="0" cellspacing="0" cellpadding="0"> 
+            <tr>
+              <td bgcolor="#FFFFFF">
+          
+       <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+
+          <table width="450" border="0" align="center" cellpadding="0" cellspacing="10">
+
+
+<% if devise_error_messages! %>
+            <tr>
+            <td>  
+</br>
+          <%= devise_error_messages! %>
+
+            </td>
+            </tr>
+<% end %>
+
+                   <tr>
+                    <td><%= f.hidden_field :reset_password_token %><%= f.label :password, "New password" %></td>
+                  </tr>
+                   <tr>
+                    <td>
+                        <label>                    
+                       
+                        <%= f.password_field :password, :autofocus => true %>
+                        </label>
+                  </td>
+                  </tr>
+<tr>
+                    <td><%= f.label :password_confirmation, "Confirm new password" %></td>
+                  </tr>
+                   <tr>
+                    <td>
+                        <label>                    
+                       
+                        <%= f.password_field :password_confirmation %>
+                        </label>
+                  </td>
+                  </tr>
+
+
+                 
+                 
+                  <tr>
+                    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td width="70%">&nbsp;</td>
+                          <td width="30%">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>&nbsp;</td>
+                          <td><%=  image_submit_tag("submit.png") %></td>
+                        </tr>
+                    </table></td>
+                  </tr>
+              </table></td>
+            </tr>
+          </table>
+<% end %>
+
+</td>
+        </tr>
+      </table>
+    </div></td>
+    <td><div class="box2" style="height:478px">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><div style="padding:66px 10px 10px" align="center"><%= link_to image_tag("already_reg.png") ,new_user_session_path  %></div></td>
+        </tr>
+        <tr>
+          <td class="signuprightlink"><a href="#">Want to know more?<br>
+            Find out how EventWeGo can<br>
+            help you sell out your event!</a><br>
+            <br>
+            Give us a call, we'd love to help. 1-888-541-9753</td>
+        </tr>
+      </table>
+    </div></td>
+  </tr>
+</table>
+

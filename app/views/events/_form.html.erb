@@ -1,0 +1,197 @@
+<div class="eventtop">
+<div class="heading"> Event Details</div>
+<div class="topbtns">
+ <%= form_for @event , :html => {:name => 'new_event',:multipart => true}  do |f| %>
+
+
+
+
+<table width="600" border="0"  cellpadding="0" cellspacing="0"><tr>
+<td width="414"></td>
+<td width="170"><div  id="loader_image"  style="display:none;float: left;  margin: 0px 122px;"  >
+<table  border="0" width="100%" cellpadding="0" cellspacing="0">
+<tr>
+<td><img src="images/ajax-loader.gif" /></td><td>&nbsp;Processing</td>
+</tr></table></div><%= image_submit_tag("save_btn.png" ,:class=>'image_submit') %></td>
+</tr>
+</table>
+</div>
+
+</div>
+<div class="eventmiddle">
+
+  <table width="930"  border="0">
+    <tr>
+      <td class="innerhead">Add your Event Details</td>
+    </tr>
+    <tr>
+      <td>
+
+<div id="result"></div>
+	  
+    
+      <table class="clear" width="100%" border="0" cellspacing="10">
+ <tr>
+            <td valign="top" class="label1" width='150'>Event Type</td>
+ <% types_array = @EventType.all.map { |type| [type.name.capitalize, type.id] } %>
+ <% lan_array = @EventLanguage.all.map { |lan| [lan.name.capitalize, lan.id] } %>
+
+            <td> <%= select_tag(:event_type_id,  options_for_select(types_array, params[:event_type_id] ||  @event.event_type_id) ,:class=>'required') %></td>
+          </tr>
+ <tr>
+            <td valign="top" class="label1" width='150'>Event Language</td>
+            <td><%= select_tag(:event_language_id,  options_for_select(lan_array, params[:event_language_id] ||  @event.event_language_id) ,{ :multiple => true,:class=>'required'} ) %></td>
+          </tr>
+          <tr>
+            <td valign="top" class="label1" width='150'>Event Title</td>
+            <td> <%= f.text_field :name,:class=>'required' %></td>
+          </tr>
+  <tr>
+            <td valign="top" class="label1" width='100'>Venue</td>
+            <td> <%= f.text_field :venue ,:class=>'required'%></td>
+          </tr>
+ <tr>
+            <td valign="top" class="label1" width='100'>Address</td>
+            <td> <%= f.text_field :address,:id=>'addresspicker_map',:class=>'required' %></td>
+          </tr>
+          <tr>
+          <td class="label1" valign='top'>Date & Time</td>
+          <td ><table width="100%" border="0">
+                <tr>
+                  <td > Event Starts </td>
+                </tr>
+                <tr>
+                  <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td width="2%">
+                             <%= f.text_field :start_at,:value=>(@event.start_at.nil? ?  params[:start_at] : @event.start_at.strftime("%d-%m-%Y")),:readonly => true,:class => 'required',:style=>'width:220px' %>
+                <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fStartPop(document.new_event.event_start_at,document.new_event.event_end_at);return false;" style="text-decoration:none;" ><img class="PopcalTrigger" align="absmiddle" src="/assets/daterange/calendar.png"  border="0" alt="Calendar" onclick="hide();"  width="20"/></a>
+</td>
+                     
+                        <td width="15%" valign='top'>
+			
+<%= select_tag(:start_hour,options_for_select((1..12).map {|m|[ m, m]}),:style=>"width:60px;",:class=>'required') %>
+<%= select_minute(Time.now + 6.hours ,{:field_name =>'start_minute',:minute_step => 5},:style=>"width:60px;",:class=>'required') %>
+<%= select_tag(:start_meridiem,options_for_select([['AM', 1], ['PM', 2]]),:style=>"width:60px;",:class=>'required') %>
+</td>
+                        
+                            
+                      </tr>
+                  </table></td>
+                </tr>
+              </table>
+                <table width="100%" border="0">
+                  <tr>
+                    <td > Event End </td>
+                  </tr>
+                  <tr>
+                    <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                      
+                        <tr>
+                          <td width="2%">  <%= f.text_field :end_at,:value=>(@event.end_at.nil? ?  params[:end_at] : @event.end_at.strftime("%d-%m-%Y")), :readonly => true, :class => 'required',:style=>'width:220px' %>
+                <a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fEndPop(document.new_event.event_start_at,document.new_event.event_end_at);return false;" style="text-decoration:none;" ><img class="PopcalTrigger" align="absmiddle" src="/assets/daterange/calendar.png"  border="0" alt="Calendar" onclick="hide();"  width="20"/></a>
+                             
+  </td>
+                         
+                          <td width="15%" valign='top'>
+<%= select_tag(:end_hour,options_for_select((1..12).map {|m|[ m, m]}),:style=>"width:60px;",:class=>'required') %>
+<%= select_minute(Time.now + 6.hours ,{:field_name =>'end_minute',:minute_step => 5},:style=>"width:60px;",:class=>'required') %>
+<%= select_tag(:end_meridiem,options_for_select([['AM', 1], ['PM', 2]]),:style=>"width:60px;",:class=>'required') %>				  </td>
+                       
+                         
+                 
+                        </tr>
+                    </table></td>
+                  </tr>
+
+              </table></td>
+          </tr>
+          <tr>
+<td valign='top' class='label1'>Event Description</td>
+<td><%= f.text_area :content, :class => 'ckeditor' ,:value=>params[:content] || @event.content %>
+
+   
+
+
+</tr>
+<tr>
+<td class='label1'>Image</td>
+<td><%= f.file_field :avatar,:class => 'required' %></td>
+</tr>
+ <tr>
+            <td valign="top" class="label1" width='100'>Facebook Url</td>
+            <td> <%= f.text_field :furl %></td>
+          </tr>
+ <tr>
+            <td valign="top" class="label1" width='100'>Twitter Url</td>
+            <td><%= f.text_field :turl %>
+
+<!-- contents above file-uploader -->
+<div id="file-uploader">
+  <noscript>
+    <p>Please enable JavaScript to use file uploader.</p>
+    <!-- or put a simple form for upload here -->
+  </noscript>
+</div>
+<!-- contents below -->
+        </div> 
+
+</td>
+          </tr>
+      </table>
+
+	  </td></tr>
+
+  </table>
+<iframe width=132 height=142 name="gToday:contrast:agenda.js" id="gToday:contrast:agenda.js" src="/assets/daterange/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;"></iframe>
+    <% end %>
+  
+</div>
+ 
+<script type="text/javascript" language="javascript">
+    $(document).ready(function(){    
+<% if controller.action_name =='new' %>   
+        $("#new_event").validate({
+<% else %>
+ $("#edit_event_<%= params[:id] %>").validate({
+<% end %>
+            rules: {
+                role: {
+                    required: true,
+                    minlength:1,
+              }
+
+            }
+        });
+    });
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script>
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(-33.8688, 151.2195),
+          zoom: 13,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };        
+
+        var input = document.getElementById('addresspicker_map');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+		
+        // Sets a listener on a radio button to change the filter type on Places
+        // Autocomplete.
+        function setupClickListener(id, types) { 
+          var radioButton = document.getElementById(id);
+          google.maps.event.addDomListener(radioButton, 'click', function() {
+            autocomplete.setTypes(types);
+          });
+        }
+
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+
+    </script>
+
+
+

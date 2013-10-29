@@ -1,0 +1,102 @@
+<table id="login" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div class="box1">
+      <table width="500" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="signuphead">SIGN UP NOW, It’s free</td>
+        </tr>
+        <tr>
+          <td><table width="530" border="0" cellspacing="0" cellpadding="0"> 
+            <tr>
+              <td bgcolor="#FFFFFF">
+          <% resource.build_profile %>
+          <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+
+          <table width="450" border="0" align="center" cellpadding="0" cellspacing="10">
+
+
+<% if devise_error_messages! %>
+            <tr>
+            <td>  
+</br>
+          <%= devise_error_messages! %>
+
+            </td>
+            </tr>
+<% end %>
+
+                  <tr>
+                    <td><%= f.label "Email" %></td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <label>
+                       
+                        <%= f.email_field :email, :autofocus => true,:size=>'70' %>
+                        </label>
+                  </td>
+                  </tr>
+                  <tr>
+                  <td><%= f.label :password %></td>
+                  </tr>
+                  <tr>
+                    <td><%= f.password_field :password ,:size=>'70'%></td>
+                  </tr>    
+                 
+	        <%= f.fields_for :profile do |p| %>
+      
+                  <tr>
+                  <td><%= p.label :mobile %></td>
+                  </tr>
+                  <tr>
+                    <td><%= p.phone_field :mobile ,:size=>'70', :onKeyUp =>"javascript:backspacerUP(this,event);" , :onKeyDown=>"javascript:backspacerDOWN(this,event);"%></td>
+                  </tr>    
+     
+               <% end %>
+
+                  
+                 
+                  <tr>
+                    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td width="70%">&nbsp;</td>
+                          <td width="30%">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>&nbsp;</td>
+                          <td><%=  image_submit_tag("sign_btn.png") %></td>
+                        </tr><tr>
+                          <td colspan="2">&nbsp;</td>
+                          </tr>
+<tr>
+                          <td colspan="2">By clicking &quot;Sign up&quot;, I confirm that I agree with the EventWeGo <a href="#">terms of service</a> and <a href="#">privacy policy</a>.<br>
+                            <br></td>
+                          </tr>
+                    </table></td>
+                  </tr>
+              </table></td>
+            </tr>
+          </table>
+<% end %>
+
+</td>
+        </tr>
+      </table>
+    </div></td>
+    <td><div class="box2" style="height:508px">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><div style="padding:66px 10px 10px" align="center"><%= link_to image_tag("already_reg.png") ,new_user_session_path  %></div></td>
+        </tr>
+        <tr>
+          <td class="signuprightlink"><a href="#">Want to know more?<br>
+            Find out how EventWeGo can<br>
+            help you sell out your event!</a><br>
+            <br>
+            Give us a call, we'd love to help. 1-888-541-9753</td>
+        </tr>
+      </table>
+    </div></td>
+  </tr>
+</table>
+

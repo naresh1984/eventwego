@@ -1,0 +1,23 @@
+<h1>Listing event_languages</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @event_languages.each do |event_language| %>
+  <tr>
+    <td><%= event_language.name %></td>
+    <td><%= link_to 'Show', event_language %></td>
+    <td><%= link_to 'Edit', edit_event_language_path(event_language) %></td>
+    <td><%= link_to 'Destroy', event_language, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Event language', new_event_language_path %>

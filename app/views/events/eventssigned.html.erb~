@@ -1,0 +1,53 @@
+
+<table width="100%">
+		 <tr>
+         <td align="left" class="searchhead2" style="padding-left:30px">My Events</td>
+        </tr>
+		</table><div class="underline" style="width:715px;"></div>
+			<table width="100%" class="listtbl"  style="background:none;">
+			<tr>
+			<td style="padding-left:20px;">
+			<span <% if controller.action_name =='myevents' %> class="linktabative" <% else %>class="linktab"<% end %>><%= link_to 'Events Created', myevents_events_path %></span><span <% if controller.action_name =='eventssigned' %> class="linktabative" <% else %>class="linktab"<% end %> ><%= link_to 'Events Signed', eventssigned_events_path %></span>
+			</td>
+			</tr>
+				<tr>
+					<td  valign="top">
+					<table width="95%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #D8D7D4;">
+				    <tr class="header">
+					<td width="50%" align="left">&nbsp;&nbsp;&nbsp;Event Name</td>
+					<td width="20%" align="center">Created Date</td>					
+					<td width="15%" align="center">Quick Links</td>
+					</tr>
+			<% @eventssigned.each do |event| %>
+			 <tr class="roweven">
+                        <td class="serachtitle" >&nbsp;<%= link_to event.event.name.capitalize ,event_path(event) ,:style =>'font-size:14px;' %></td>
+						<td class="serachtitle" align="center"><%= event.event.start_at.strftime("%b %d ,%Y") %></td>
+						
+						<td class="serachtitle" align="center"><%= link_to image_tag('view.png') ,event_path(event) %>&nbsp;&nbsp;</td>
+                      </tr>
+<% end %>
+			
+  
+                <% if @eventssigned.empty? %>
+                <tr>
+                  <td  align="center" colspan='4'>No Records Found</td>
+                </tr>
+                <% end %>
+		                       
+                  </table>
+					
+					</td>					
+				</tr>
+<%  if @eventssigned.count>10 %>
+                <tr>
+                  <td  align="center">
+                    <%= will_paginate @eventssigned, renderer: BootstrapPagination::Rails %>
+                    
+                  </td>
+                </tr>
+                <% end %>
+			</table>
+
+
+
+

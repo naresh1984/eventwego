@@ -1,0 +1,12 @@
+<table width="100%" border="0">
+  <tr>
+  		<td width="23%" valign="top">
+			<%= render 'layouts/left'  %>
+		</td>
+		<td width="77%" valign="top" align='center'>
+                <div id='noid'>
+		<%= raw(calendar) %> 
+                </div>		
+		</td>	
+  </tr>
+</table>

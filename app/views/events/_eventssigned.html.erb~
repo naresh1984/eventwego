@@ -1,0 +1,51 @@
+<% flash.each do |name, msg| %>
+    <%= content_tag :div, :class => "alert #{name == :error ? "alert-error" : "alert-success" }" do %>
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <%= msg %>
+    <% end %>
+  <% end %>
+<table width="97%" class='listtbl' border="0" style="margin:0;">
+ <tr>
+<td align="left" class="searchhead2" style="padding-left:30px" >My Events</td></tr>
+<tr>
+<tr><td><div class="underline" style="width:715px;"></div></td></tr>
+			<td style="padding-left:20px;">
+			<span <% if controller.action_name =='myevents' %> class="linktabative" <% else %>class="linktab"<% end %>><%= link_to 'Events Created', myevents_events_path(:format=>:js) ,:remote=>'true'%></span><span <% if controller.action_name =='eventssigned' %> class="linktabative" <% else %>class="linktab"<% end %> ><%= link_to 'Events Signed', eventssigned_events_path(:format=>:js),:remote=>'true'  %></span>
+			</td>
+			</tr>
+                    <tr>
+                    <td ><table width="95%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #D8D7D4;" id='datos' class='datos'>
+				    <tr class="header">
+					<td width="50%" align="left">&nbsp;&nbsp;&nbsp;Event Name</td>
+					<td width="20%" align="center">Created Date</td>
+					
+					<td width="15%" align="center">Quick Links</td>
+					</tr>
+<% @eventssigned.each do |event| %>
+			 <tr class="roweven">
+                        <td class="serachtitle" >&nbsp;<%= link_to event.event.name.capitalize ,event_path(event.event_id),:style =>'font-size:14px;'%></td>
+						<td class="serachtitle" align="center"><%= event.event.start_at.strftime("%b %d ,%Y") %></td>
+						
+						<td class="serachtitle" align="center"><%= link_to image_tag('view.png') ,event_path(event.event_id) %></td>
+                      </tr>
+<% end %>   <% if @eventssigned.empty? %>
+                <tr>
+                  <td  align="center" colspan='4'>No Records Found</td>
+                </tr>
+                <% end %>
+					                       
+                  </table>  </td>
+                     </tr>
+<%  if @eventssigned.count>10 %>
+                <tr>
+                  <td  align="center" colspan='4' class="pagination">
+                    <%= will_paginate @eventssigned, renderer: BootstrapPagination::Rails %>
+                    
+                  </td>
+                </tr>
+                <% end %>
+                    </table>
+<script>
+$(document).ready(function() {
+    $('.pagination a').attr('data-remote', 'true');
+});</script>

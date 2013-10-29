@@ -1,0 +1,86 @@
+<table width="100%" border="0">
+      <tr>
+        <td>
+ <% if flash %>
+<table width="97%" border="0">
+<tr>
+
+<td>
+<% flash.each do |name, msg| %>
+    <%= content_tag :div, :class => "alert #{name == :error ? "alert-error" : "alert-success" }" do %>
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <%= msg %>
+    <% end %>
+  <% end %>
+
+</td>
+</tr>
+</table>
+<% end %>
+
+</td>
+      </tr>
+ <% if @events.count>0 %>
+      <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+             
+              <tr>
+                <td colspan="2" class="searchhead2" style="padding-left:30px"><%= @events.count >1? "#{@events.count} Events" : "#{@events.count} Event" %>  </td>
+                </tr>
+            </table></td>
+          </tr>
+ <% end %>
+        <% @events.each do |event| %>
+          <tr>
+            <td><div class="underline">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="10%"><div class="datebg">
+                    <div class="dates" ><%= event.start_at.strftime("%a") %></div>
+                    <div style=" font-size: 32px;font-weight: bold; padding: 6px 0;"><%= event.start_at.strftime("%d") %></div>
+                    <div class="dates" ><%= event.start_at.strftime("%b") %></div>
+                  </div></td>
+                  <td width="90%" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td class="serachtitle">&nbsp;&nbsp;<%= link_to event.name.capitalize,event_path(event) %></td>
+                      </tr>
+                      <tr>
+                        <td class="points"><%= event.type.capitalize %></td>
+                      </tr>
+                      <tr>
+                        <td class="points">Where: <%= event.address %></td>
+                      </tr>
+                      <tr>
+                        <td class="points">When:  <%= event.start_at.strftime("%m/%d/%Y")+" "+event.start_hour+":"+event.start_minute+" To "+event.end_at.strftime("%m/%d/%Y")+" "+event.start_hour+":"+event.start_minute %></td>
+                      </tr>
+                  </table></td>
+                  <td style='display:block;' width='146'><%= link_to image_tag(event.avatar.url(:small)),event_path(event) %></td>
+                </tr>
+              </table>
+            </div></td>
+          </tr>
+          <% end %>
+            <%  if @events.count>10 %>
+                <tr>
+                  <td  align="center" class="pagination">
+
+                    <%= will_paginate @events, renderer: BootstrapPagination::Rails, :params => { :name => params[:name],:address => params[:address],:dates => params[:dates],:types => params[:types]} %>
+                    
+                  </td>
+                </tr>
+                <% end %>
+                <% if @events.empty? %>
+                 <tr>
+                  <td  align="center" height='50'></td>
+                </tr>
+                <tr>
+                  <td  align="center">No Records Found</td>
+                </tr>
+                <% end %>
+         
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+        </table>
+
+

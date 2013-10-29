@@ -1,0 +1,101 @@
+<div class="loginmiddle">
+<table id="eventdtials" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top"><div class="box1">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><table width="621" border="0" align="left" cellpadding="0" cellspacing="0">
+            <tr>
+              <td bgcolor="#FFFFFF"><span class="eventdtialsphead"><%= @event.name.capitalize %></span></td>
+            </tr>
+            <tr>
+              <td bgcolor="#FFFFFF" class="eventdtialspvd">Venue : <%= @event.address %></td>
+            </tr>
+            <tr>
+              <td bgcolor="#FFFFFF" class="eventdtialspcont"> <%= @event.start_at.strftime("%m/%d/%Y")+" "+@event.start_hour+":"+@event.start_minute+" "+(@event.start_meridiem=='1'?   "AM" : "PM" )+" "+@event.end_at.strftime("%m/%d/%Y")+" "+@event.end_hour+":"+@event.end_minute+" "+(@event.end_meridiem=='1'?  "AM" : "PM" ) %></td>
+            </tr>
+          </table></td>
+        </tr>
+       <tr>
+              <td bgcolor="#FFFFFF" class="eventdtialspvd" height='75'>Language : <% i=1 %><% @EventLanguage.each do |lng| %><%= lng.name.capitalize %><% if  i < @EventLanguage.size %>,<% end %><% i+=1 %><% end %></td>
+            </tr>
+      
+        <tr>
+          <td><table width="621" border="0" align="left" cellpadding="0" cellspacing="0">
+            <tr>
+              <td bgcolor="#FFFFFF"><span class="eventsubhead">Event Details</span></td>
+            </tr>
+            <tr>
+              <td bgcolor="#FFFFFF" class="eventsocialcont"><%= raw @event.content %></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table>
+    </div></td>
+    <td valign="top"><div class="box2">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="middle"><div align="center">
+            <p>&nbsp;</p>
+            <p><%= image_tag @event.avatar.url(:thumb) %><br>
+            </p>
+            </div></td>
+        </tr>
+        <tr>
+          <td class="signuprightlink"><table width="265" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td bgcolor="#FFFFFF"><span class="eventsubhead"> Where</span></td>
+            </tr>
+            <tr>
+              <td bgcolor="#FFFFFF" class="eventsocialcont"><p><div id="map" style="width:265px; height: 258px;"></div>
+    <script type="text/javascript">
+    var locations = [
+      ['<%= @event.address+" ("+@event.start_at.strftime("%m/%d/%Y")+" "+@event.start_hour+":"+@event.start_minute+" "+(@event.start_meridiem=='1'?   "AM" : "PM" )+" "+@event.end_at.strftime("%m/%d/%Y")+" "+@event.end_hour+":"+@event.end_minute+" "+(@event.end_meridiem=='1'?  "AM" : "PM")+")" %>',<%= @event.latitude %>,<%= @event.longitude %>]
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: new google.maps.LatLng(<%= @event.latitude %>, <%= @event.longitude %>),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+
+  </script>
+
+
+</p>
+                <p><%= @event.address %></p>
+                <p class="eventsubhead">When:</p>
+                  <%= @event.start_at.strftime("%m/%d/%Y")+" "+@event.start_hour+":"+@event.start_minute+" "+(@event.start_meridiem=='1'?   "AM" : "PM" )+" "+@event.end_at.strftime("%m/%d/%Y")+" "+@event.end_hour+":"+@event.end_minute+" "+(@event.end_meridiem=='1'?  "AM" : "PM" ) %></td>
+            </tr>
+          </table></td>
+        </tr>
+        <tr>
+          <td >&nbsp;</td>
+        </tr>
+       
+          </table></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</div>
+
