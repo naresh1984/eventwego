@@ -18,5 +18,3 @@
 .idea
 *.*~
 
-/vendor/cache/*.*
-/vendor/plugin/*.*
