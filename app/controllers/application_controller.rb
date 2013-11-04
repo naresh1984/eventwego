@@ -46,13 +46,13 @@ def nextmonth_count
     return @nextmonth_count if defined?(@nextmonth_count)
      @nextmonth_count = Event.select('id').events_for_date_range(d.end_of_month+1.day,((d.beginning_of_month+2.month)+1.day)).count
   end
-def all_types
+def all_typess
     @event_start=Event.select('start_at').order('start_at ASC').limit(1)
     @event_end=Event.select('end_at').order('end_at DESC').limit(1)  
 @all_types=Event.select('event_type_id,count(event_type_id) as count').where("('#{@event_start[0].start_at}'<=end_at) AND (start_at< '#{@event_end[0].end_at+ 1.days}') AND end_at>='#{Date.today.strftime("%Y-%m-%d")}' " ).group("events.event_type_id")
 
   end
-def all_location
+def all_locations
     @event_start=Event.select('start_at').order('start_at ASC').limit(1)
     @event_end=Event.select('end_at').order('end_at DESC').limit(1)  
 @all_location=Event.select('city,count(city) as count').where("('#{@event_start[0].start_at}'<=end_at) AND (start_at< '#{@event_end[0].end_at+ 1.days}') AND city!='' AND end_at>='#{Date.today.strftime("%Y-%m-%d")}' "  ).group("events.city")
