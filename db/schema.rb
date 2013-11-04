@@ -29,15 +29,15 @@ ActiveRecord::Schema.define(:version => 20131025082859) do
     t.string   "name"
     t.date     "start_at"
     t.date     "end_at"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.string   "start_hour"
     t.string   "start_minute"
     t.string   "start_meridiem"
     t.string   "end_hour"
     t.string   "end_minute"
     t.string   "end_meridiem"
-    t.text     "content",             :limit => 2147483647
+    t.text     "content"
     t.text     "featured_image"
     t.string   "venue"
     t.text     "address"
@@ -59,21 +59,6 @@ ActiveRecord::Schema.define(:version => 20131025082859) do
     t.datetime "avatar_updated_at"
   end
 
-  create_table "nareshes", :force => true do |t|
-    t.string   "name"
-    t.string   "image"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.string   "upload_file_name"
-    t.string   "upload_content_type"
-    t.integer  "upload_file_size"
-    t.datetime "upload_updated_at"
-  end
-
   create_table "profiles", :force => true do |t|
     t.string   "mobile"
     t.integer  "user_id"
@@ -90,7 +75,6 @@ ActiveRecord::Schema.define(:version => 20131025082859) do
     t.datetime "rich_file_updated_at"
     t.string   "owner_type"
     t.integer  "owner_id"
-    t.text     "uri_cache"
     t.string   "simplified_type",        :default => "file"
   end
 

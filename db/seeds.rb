@@ -14,9 +14,11 @@ end
   EventLanguage.create(name: r)
 end
 
+@type=EventType.find(1)
+@lan=EventLanguage.find(1)
+results = Geocoder.search('Hyderabad, Andhra Pradesh, India') 
 
-
-employee = Event.create!(name: 'naresh', start_at: "2013-10-28", end_at: "2013-10-30",city:'hyd',event_type_id: '1',event_language_id:'1,2')
+event = Event.create(name:'naresh', start_at: Date.today-1.days, end_at: Date.today-1.days, city: results[0].city , event_type_id: @type.id, event_language_id: @lan.id, latitude: results[0].latitude, longitude: results[0].longitude, state: results[0].state, country: results[0].country, zipcode: results[0].postal_code,start_minute: 00 ,start_hour: 9 ,start_meridiem: 'AM',end_minute: 00 ,end_hour: 11,end_meridiem: 'AM', address: 'Hyderabad, Andhra Pradesh, India',content:'hii',venue:'hyd' )
 
 
 
