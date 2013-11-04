@@ -127,9 +127,9 @@ end
      @locount=all_location  
     
      @typecount= @all_types.sum(&:counts)
-     @locount=  @all_location.sum(&:counts)
+     @locount=   @all_location.sum(&:counts)
      end 
-    #raise @typecount.inspect 
+   
   if params[:address].present?   
     results = Geocoder.search(params[:address])  
  @events=Event.joins(:event_type).select('events.id,events.name,events.start_at,events.end_at,events.start_hour,events.start_minute,events.address,events.avatar,event_types.name as type').where(@search).near([results[0].latitude,results[0].longitude],25).paginate(:page => params[:page],:per_page => 10).order("start_at ASC")
