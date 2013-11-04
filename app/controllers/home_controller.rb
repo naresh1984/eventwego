@@ -124,7 +124,8 @@ end
      @nextmonth_count=nextmonth_count
      @all_events=all_events
      @all_types=all_types
-     @all_location=all_location   
+     @locount=all_location  
+     #raise @locount.inspect 
      @typecount= @all_types.map { |h| h[:counts] }.sum
      @locount=  @all_location.map { |h| h[:counts] }.sum
      end 
