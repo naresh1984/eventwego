@@ -151,8 +151,14 @@ def myevents
      @all_events=all_events()
      @all_types=all_types()
      @all_location=all_location()
-     @typecount= @all_types.map { |h| h[:counts] }.sum
-     @locount=  @all_location.map { |h| h[:counts] }.sum
+     @typecount=0  
+     @locount=0 
+     @all_types.each do |ty|
+     @typecount +=ty.counts.to_i
+     end
+     @all_location.each do |ty|
+     @locount +=ty.counts.to_i
+     end
      @userevents = Event.select('id,name,start_at').where(:user_id=>current_user.id).paginate(:page => params[:page],:per_page => 10) 
      #raise @userevents.inspect
      respond_to do |format|
@@ -171,8 +177,14 @@ def eventssigned
      @all_events=all_events()
      @all_types=all_types()
      @all_location=all_location()
-     @typecount= @all_types.map { |h| h[:counts] }.sum
-     @locount=  @all_location.map { |h| h[:counts] }.sum
+     @typecount=0  
+     @locount=0 
+     @all_types.each do |ty|
+     @typecount +=ty.counts.to_i
+     end
+     @all_location.each do |ty|
+     @locount +=ty.counts.to_i
+     end
      @eventssigned = UserSigned.joins(:user,:event).where(:user_id=>current_user.id).paginate(:page => params[:page],:per_page => 10) 
      #raise @eventssigned.inspect
   respond_to do |format|
