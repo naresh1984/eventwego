@@ -126,8 +126,8 @@ end
      @all_types=all_types
      @locount=all_location  
     
-     @typecount= @all_types.map(&:counts).inject(:+)
-     @locount=  @all_location.map(&:counts).inject(:+)
+     @typecount= @all_types.sum(&:counts)
+     @locount=  @all_location.sum(&:counts)
      end 
     #raise @typecount.inspect 
   if params[:address].present?   
