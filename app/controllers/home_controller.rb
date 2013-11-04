@@ -126,8 +126,14 @@ end
      @all_types=all_types
      @locount=all_location  
     
-     @typecount= @all_types.sum(&:counts)
-     @locount=   @all_location.sum(&:counts)
+      
+    @typecount=@all_types.map{|a| a.counts}.sum
+    
+ 
+    @locount=@locount.map{|a| a.counts}.sum
+
+   
+    
      end 
    
   if params[:address].present?   
