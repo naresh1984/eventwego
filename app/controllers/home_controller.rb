@@ -127,10 +127,10 @@ end
      @locount=all_location  
     
       
-    @typecount=@all_types.map{|a| a.counts}.sum
+    @typecount=@all_types.sum(:counts)
     
  
-    @locount=@locount.map{|a| a.counts}.sum
+    @locount=@locount.sum(:counts)
 
    
     
