@@ -125,8 +125,8 @@ end
      @all_events=all_events
      @all_types=all_types
      @all_location=all_location   
-     @typecount= @all_types.inject(0) { |sum, p|     +p.count }
-     @locount=   @all_location.inject(0) { |sum, p|  +p.count }
+     @typecount= all_types.inject(0) { |sum, p|     +p.count }
+     @locount=   all_location.inject(0) { |sum, p|  +p.count }
      end 
     
   if params[:address].present?   
