@@ -49,7 +49,7 @@
         <td colspan="2"  id="serachbg1"><ul>
           <li class="active">All Types (<%=  @typecount%>)</li>
          <% @all_types.each do |type| %>
-          <li><%= check_box_tag 'types[]' ,  type.event_type.id , false %><a><%= type.event_type.name.capitalize %> (<%= type.count %>)</a></li>
+          <li><%= check_box_tag 'types[]' ,  type.event_type.id , false %><a><%= type.event_type.name.capitalize %> (<%= type.counts %>)</a></li>
          <% end %>
         </ul></td>
       </tr>
@@ -65,7 +65,7 @@
         <td colspan="2"  id="serachbg1"><ul>
             <li class="active">All Dates (<%=  @locount %>)</li>
            <% @all_location.each do |loc| %>
-          <li><%= check_box_tag 'location[]' ,  loc.city , false %><a><%= loc.city.capitalize %> (<%= loc.count %>)</a></li>
+          <li><%= check_box_tag 'location[]' , loc.city , false %><a><%= loc.city.capitalize %> (<%= loc.counts %>)</a></li>
           <% end %>
         
         </ul></td>
@@ -73,5 +73,6 @@
     </table></td>
     </tr>
 </table>
+
 
 
