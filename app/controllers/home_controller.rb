@@ -140,7 +140,7 @@ end
      
   if params[:address].present?   
     results = Geocoder.search(params[:address])  
- @events=Event.joins(:event_type).select('events.id,events.name,events.start_at,events.end_at,events.start_hour,events.start_minute,events.end_hour,events.end_minute,events.address,events.avatar,event_types.name as type').where(@search).near([results[0].latitude,results[0].longitude],25).paginate(:page => params[:page],:per_page => 10).order("start_at ASC")
+ @events=Event.joins(:event_type).select('events.id,events.name,events.start_at,events.end_at,events.start_hour,events.start_minute,events.end_hour,events.end_minute,events.address,events.avatar,event_types.name as type').near([results[0].latitude,results[0].longitude],25).where(@search).paginate(:page => params[:page],:per_page => 10).order("start_at ASC")
 
     else
      @events=Event.joins(:event_type).select('events.id,events.name,events.start_at,events.end_at,events.start_hour,events.start_minute,events.end_hour,events.end_minute,events.address,events.avatar_file_name,events.avatar_updated_at,event_types.name as type').where(@search).paginate(:page => params[:page],:per_page => 10).order("start_at ASC")      
