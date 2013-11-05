@@ -150,7 +150,7 @@ end
  @search+=" AND (#{unit} * ACOS( SIN(RADIANS(#{results[0].latitude})) * SIN(RADIANS(events.latitude)) + COS(RADIANS(#{results[0].latitude})) * COS(RADIANS(latitude)) * COS(RADIANS(#{results[0].longitude}) - RADIANS(events.longitude))) < 25)";
 
 end
-     @events=Event.joins(:event_type).select('events.id,events.name,events.start_at,events.end_at,events.start_hour,events.start_minute,events.end_hour,events.end_minute,events.address,events.avatar_file_name,events.avatar_updated_at,event_types.name as type').where(@search).paginate(:page => params[:page],:per_page => 10).order("start_at ASC")      
+     @events=Event.joins(:event_type).select('events.id,events.name,events.start_at,events.end_at,events.start_hour,events.start_minute,events.end_hour,events.end_minute,events.address,events.avatar_file_name,events.avatar_updated_at,event_types.name as type').near(params[:address]).paginate(:page => params[:page],:per_page => 10).order("start_at ASC")      
 
 
 
