@@ -61,5 +61,6 @@ module Eventwego
 
 
     config.assets.initialize_on_precompile = true
+
   end
 end
