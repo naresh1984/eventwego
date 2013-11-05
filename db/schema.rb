@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131025082859) do
+ActiveRecord::Schema.define(:version => 20131105064449) do
 
   create_table "event_languages", :force => true do |t|
     t.string   "name"
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20131025082859) do
     t.text     "address"
     t.string   "furl"
     t.string   "turl"
-    t.string   "latitude"
-    t.string   "longitude"
+    t.float    "latitude"
+    t.float    "longitude"
     t.integer  "event_type_id"
     t.string   "event_language_id"
     t.string   "city"

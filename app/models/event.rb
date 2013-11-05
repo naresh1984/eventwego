@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
 include Paperclip::Glue
 attr_accessible :start_at, :end_at, :name ,:content,:venue,:address,:furl,:turl,:latitude,:longitude,:avatar,:city,:event_type_id,
-:event_language_id,:start_hour,:start_minute,:start_meridiem,:end_hour,:end_minute,:end_meridiem
+:event_language_id,:start_hour,:start_minute,:start_meridiem,:end_hour,:end_minute,:end_meridiem,:state,:country,:zipcode
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "267x175!>", :small => "146x97!>" }, :default_url => "default_upload_logo.gif"
   
 

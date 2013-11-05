@@ -5,5 +5,7 @@ class AddFloatEvents < ActiveRecord::Migration
   end
 
   def down
+  change_column :events, :latitude, :float
+  change_column :events, :longitude, :float
   end
 end

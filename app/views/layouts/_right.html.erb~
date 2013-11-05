@@ -20,12 +20,12 @@
 
 </td>
       </tr>
- <% if @events.count>0 %>
+ <% if @events.size>0 %>
       <tr>
         <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
              
               <tr>
-                <td colspan="2" class="searchhead2" style="padding-left:30px"><%= @events.count >1? "#{@events.count} Events" : "#{@events.count} Event" %>  </td>
+                <td colspan="2" class="searchhead2" style="padding-left:30px"><%= @events.size >1? "#{@events.count} Events" : "#{@events.count} Event" %>  </td>
                 </tr>
             </table></td>
           </tr>
@@ -51,7 +51,7 @@
                         <td class="points">Where: <%= event.address %></td>
                       </tr>
                       <tr>
-                        <td class="points">When:  <%= event.start_at.strftime("%m/%d/%Y")+" "+event.start_hour+":"+event.start_minute+" To "+event.end_at.strftime("%m/%d/%Y")+" "+event.start_hour+":"+event.start_minute %></td>
+                        <td class="points">When:  <%= event.start_at.strftime("%m/%d/%Y")+" "+event.start_hour+":"+event.start_minute+" To "+event.end_at.strftime("%m/%d/%Y")+" "+event.end_hour+":"+event.end_minute %></td>
                       </tr>
                   </table></td>
                   <td style='display:block;' width='146'><%= link_to image_tag(event.avatar.url(:small)),event_path(event) %></td>
