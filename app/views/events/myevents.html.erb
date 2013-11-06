@@ -1,13 +1,15 @@
 <table width="100%" border="0">
   <tr>
   		<td width="23%" valign="top">
+<%= form_tag root_path ,:remote=>'true',:id=>'checkbox',:name=>'checkbox' do |f| %>
 			<%= render 'layouts/left'  %>
+<% end %>
 		</td>
-		<td width="77%" valign="top">
+		<td width="77%" valign="top" >
 
 
 
-
+ <div id='home' >
 
     <div id="noid" >
 
@@ -57,7 +59,7 @@
                   </td>
                 </tr>
                 <% end %>
-                    </table></div>
+                    </table></div></div>
 
 					  
 		</td>					
@@ -68,6 +70,12 @@
 <script>
 $(document).ready(function() {
     $('.pagination a').attr('data-remote', 'true');
-});</script>
+});
+$('input:checkbox').click(function(e){
+
+  $(this).closest('form').submit();
+});
+
+</script>
 
 

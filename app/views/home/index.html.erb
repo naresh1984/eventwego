@@ -18,14 +18,14 @@
 </td>
               <td>&nbsp;</td>
               <td valign='middle'>
-             <%= image_submit_tag("serach_btn.png" ,:class=>'image_submit') %>            
+             <%= image_submit_tag("serach_btn.png" ,:class=>'image_submit',:disable_with => "Please wait...") %>            
                   
             </td>
             </tr>
           </table>
 
 
-        </div>  <div id='noid'>
+        </div>  <div id='home'>
                 <%= render 'layouts/right'  %> <div>			
 		</td>	
   </tr>
@@ -70,6 +70,7 @@ $(document).ready(function() {
       })
      });
 $('input:checkbox').click(function(e){
+
   $(this).closest('form').submit();
 });
     </script>
