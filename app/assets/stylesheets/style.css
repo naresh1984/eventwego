@@ -104,7 +104,7 @@ a {
 
 #content .loginmiddle { background:url('inner_mid.png') repeat-y 0 0; width:997px;}
 #content .loginbottom { background:url('inner_bot.png') no-repeat; width:997px; height:15px;  margin-bottom: 30px;}
-#content .eventtop { background:url('cont_bg_top_event.png') no-repeat; width:997px; height:93px;}
+#content .eventtop { background:url('cont_bg_top_event.png') no-repeat; width:997px; height:93px; position: absolute;}
 #content .eventmiddle { background:url('cont_bg_mid.png') repeat-y 0 0; width:997px;}
 #content .eventbottom { background:url('cont_bg_bottom.png') no-repeat; width:997px; height:15px;  margin-bottom: 30px;}
 
