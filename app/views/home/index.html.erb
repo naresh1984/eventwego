@@ -5,6 +5,22 @@
 			<%= render 'layouts/left'  %>
 		</td>
 		<td width="77%" valign="top">
+<% if flash %>
+<table width="97%" border="0">
+<tr>
+
+<td>
+<% flash.each do |name, msg| %>
+    <%= content_tag :div, :class => "alert #{name == :error ? "alert-error" : "alert-success" }" do %>
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <%= msg %>
+    <% end %>
+  <% end %>
+
+</td>
+</tr>
+</table>
+<% end %>
 <div id="serachbg">
  
 
@@ -23,22 +39,7 @@
             </td>
             </tr>
           </table>
-<% if flash %>
-<table width="97%" border="0">
-<tr>
 
-<td>
-<% flash.each do |name, msg| %>
-    <%= content_tag :div, :class => "alert #{name == :error ? "alert-error" : "alert-success" }" do %>
-      <a class="close" data-dismiss="alert" href="#">×</a>
-      <%= msg %>
-    <% end %>
-  <% end %>
-
-</td>
-</tr>
-</table>
-<% end %>
 
         </div>  <div id='home'>
                 <%= render 'layouts/right'  %> <div>			
