@@ -116,7 +116,7 @@
 </tr>
 <tr>
 <td class='label1'>Image</td>
-<td><%= f.file_field :avatar,:class => 'required' %></td>
+<td><% if controller.action_name =='edit' %><%= f.file_field :avatar %><%= image_tag @event.avatar.url(:small) %><%else %><%= f.file_field :avatar,:class => 'required' %><% end %> </td>
 </tr>
  <tr>
             <td valign="top" class="label1" width='100'>Facebook Url</td>

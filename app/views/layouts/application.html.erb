@@ -1,12 +1,6 @@
 <%= render 'layouts/header'  %>
-<% if current_user %>
-
-
-<% end %>
-
-
 <div id="content">
-<div class="searchtop"></div>
+
 <div class="searchmiddle" <% if (controller.controller_name!='home' && controller.controller_name!='calendar' &&  controller.action_name !='myevents' &&  controller.action_name !='eventssigned') %>style="background:url('/assets/search_mid1.png');width:992px;"<% end %>>
 <%= yield %>
 </div>

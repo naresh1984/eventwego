@@ -30,14 +30,14 @@ class ApplicationController < ActionController::Base
 def thisweek_count
      d = Date.today  
     return @thisweek_count if defined?(@thisweek_count)
-    @thisweek_count=Event.select('id').events_for_date_range((d.at_beginning_of_week).strftime("%Y-%m-%d"), (d.at_end_of_week+ 1.days).strftime("%Y-%m-%d")).count 
+    @thisweek_count=Event.select('id').where("end_at>='#{d.strftime("%Y-%m-%d")}'").events_for_date_range((d.at_beginning_of_week).strftime("%Y-%m-%d"), (d.at_end_of_week+ 1.days).strftime("%Y-%m-%d")).count 
    
   end
 
 def weekend_count
  d = Date.today  
     return @weekend_count if defined?(@weekend_count)
-   @weekend_count=Event.select('id,name').events_for_date_range((d.at_end_of_week-1.day).strftime("%Y-%m-%d"), (d.at_end_of_week+1.day).strftime("%Y-%m-%d")).count 
+   @weekend_count=Event.select('id,name').where("end_at>='#{d.strftime("%Y-%m-%d")}'").events_for_date_range((d.at_end_of_week-1.day).strftime("%Y-%m-%d"), (d.at_end_of_week+1.day).strftime("%Y-%m-%d")).count 
   #raise  d.at_end_of_week.strftime("%Y-%m-%d").inspect  
   end
 

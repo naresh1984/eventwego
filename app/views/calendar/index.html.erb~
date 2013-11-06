@@ -1,12 +1,21 @@
 <table width="100%" border="0">
   <tr>
   		<td width="23%" valign="top">
+			<%= form_tag root_path ,:remote=>'true',:id=>'checkbox',:name=>'checkbox' do |f| %>
 			<%= render 'layouts/left'  %>
+<% end %>
 		</td>
 		<td width="77%" valign="top" align='center'>
-                <div id='noid'>
+                <div id='home'><div id='noid'>
 		<%= raw(calendar) %> 
-                </div>		
+                </div>	
+                 </div>		
 		</td>	
   </tr>
 </table>
+<script>
+$('input:checkbox').click(function(e){
+
+  $(this).closest('form').submit();
+});
+</script>

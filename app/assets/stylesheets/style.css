@@ -11,7 +11,7 @@ body {
 	background:#1a3455 url('bg_line.gif') repeat-x 0 0;
 }
 
-table { clear:both}
+/*table { clear:both}*/
 img, button {
 	border: 0;
 }

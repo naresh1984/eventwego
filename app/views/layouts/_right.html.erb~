@@ -1,25 +1,5 @@
 <table width="100%" border="0">
-      <tr>
-        <td>
- <% if flash %>
-<table width="97%" border="0">
-<tr>
-
-<td>
-<% flash.each do |name, msg| %>
-    <%= content_tag :div, :class => "alert #{name == :error ? "alert-error" : "alert-success" }" do %>
-      <a class="close" data-dismiss="alert" href="#">×</a>
-      <%= msg %>
-    <% end %>
-  <% end %>
-
-</td>
-</tr>
-</table>
-<% end %>
-
-</td>
-      </tr>
+     
  <% if @events.size>0 %>
       <tr>
         <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
