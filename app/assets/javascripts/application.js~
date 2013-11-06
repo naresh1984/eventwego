@@ -12,8 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require ckeditor-jquery
+//= require jquery.validate.min
+//= require phone
+//= require_tree .
+
 
 
 
