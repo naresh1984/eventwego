@@ -68,7 +68,7 @@ end
      @event.end_minute=params[:end_minute]
      @event.end_meridiem=params[:end_meridiem]
      @event.user_id=current_user.id
-     @event.status=1
+     @event.status=1.to_i
      #Event.uploadfile(params[:event][:avatar])
 
 
@@ -81,7 +81,6 @@ end
    # raise  @event.event_language_id.inspect
     respond_to do |format|
       if @event.save
-
         @UserSigned = UserSigned.new
         @UserSigned.user_id=current_user.id
         @UserSigned.event_id=@event.id
