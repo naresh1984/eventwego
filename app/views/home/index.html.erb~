@@ -5,16 +5,22 @@
 			<%= render 'layouts/left'  %>
 		</td>
 		<td width="77%" valign="top">
+<% if flash.count>0 %>
+<table width="99%">
+<tr>
+<td>
 <% flash.each do |name, msg| %>
     <%= content_tag :div, :class => "alert #{name == :error ? "alert-error" : "alert-success" }" do %>
       <a class="close" data-dismiss="alert" href="#">×</a>
       <%= msg %>
     <% end %>
   <% end %>
+</td>
+</tr>
+</table>
+  <% end %>
 
 <div id="serachbg">
- 
-
           <table width="97%" border="0" style="padding-top:20px">
             <tr>
               <td valign='middle'><span id='magicon'></span>
@@ -68,6 +74,7 @@ $(document).ready(function() {
 
       }
       google.maps.event.addDomListener(window, 'load', initialize);
+
   $(function() {
      $("form").bind("ajax:beforeSend", function(){
         $("#spinner_question").show();

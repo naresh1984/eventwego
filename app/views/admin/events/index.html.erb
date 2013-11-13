@@ -1,0 +1,61 @@
+<table width="100%">
+<tr>
+<td class="pgtitle">Events</td>
+<td align="right"><%= link_to 'Add Event', new_admin_event_path,:class=>'linkbtn' %></td>
+</tr>
+</table>
+ <% if notice %>
+ <%= content_tag :div, :class => "alert alert-#{notice}" do %>
+    <a class="close" data-dismiss="alert" href="#">×</a>
+    <%= notice %>
+  <% end %>
+  <% end %>
+
+<table class="listtbl" cellpadding="1" cellspacing="1" width="100%" >
+<tr class="header">
+<td width="7%">#</td>
+<td width="57%">Name</td>					
+<td width="17%">Action</td>
+</tr>	
+<% i=1 %>
+<% @events.each do |type| %>
+<% rowclass = (i%2==0) ? 'roweven' : 'rowodd' %>
+<tr class="<%= rowclass %>">
+<td align="center"><%= i %></td>
+<td><%= link_to type.name, '#',:onclick=>"javascript:void window.open('#{admin_event_path(type)}','1348486909895','width=1200,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=120,top=100')" %></td>
+
+<td align="center">
+<%= link_to image_tag("admin/edit.png") ,edit_admin_event_path(type) %>&nbsp;&nbsp;
+<% if type.status==1 %>
+<%= link_to image_tag("admin/ac.png") ,status_admin_events_path(:id=>type,:status=>type.status,:page=>params[:page]) %>
+<% else %>
+<%= link_to image_tag("admin/in.png") ,status_admin_events_path(:id=>type,:status=>type.status,:page=>params[:page]) %>
+<% end %>
+</td>
+</tr>
+ <% i+=1 %>
+<% end %>
+<% if @events.empty? %>
+<tr class='rowodd'>
+<td colspan='4' align='center'>No Records Found</td>
+<% end %>
+<% if @events.count >10 %>
+<tr class='rowodd pagination'>
+<td colspan='4' align='center'><%= will_paginate @events, renderer: BootstrapPagination::Rails %>
+</td>
+<% end %>
+
+</table>
+<script>
+
+
+
+function popupwindow(url, title, w, h) {
+  var left = (screen.width/3)-(w/3);
+  var top = (screen.height/2)-(h/2);
+  return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+} 
+
+
+
+</script>

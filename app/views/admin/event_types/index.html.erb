@@ -1,0 +1,44 @@
+<table width="100%">
+<tr>
+<td class="pgtitle">Event Types </td>
+<td align="right"><%= link_to 'Add Type', new_admin_event_type_path,:class=>'linkbtn' %></td>
+</tr>
+</table>
+ <% if notice %>
+ <%= content_tag :div, :class => "alert alert-#{notice}" do %>
+    <a class="close" data-dismiss="alert" href="#">×</a>
+    <%= notice %>
+  <% end %>
+  <% end %>
+
+<table class="listtbl" cellpadding="1" cellspacing="1" width="100%" >
+<tr class="header">
+<td width="7%">#</td>
+<td width="57%">Name</td>				
+<td width="17%">Action</td>
+</tr>	
+<% i=1 %>
+<% @event_types.each do |type| %>
+<% rowclass = (i%2==0) ? 'roweven' : 'rowodd' %>
+<tr class="<%= rowclass %>">
+<td align="center"><%= i %></td>
+<td><%= type.name %></td>
+<td align="center">
+<%= link_to image_tag("admin/view.png") ,admin_event_type_path(type) %>&nbsp;&nbsp;
+<%= link_to image_tag("admin/edit.png") ,edit_admin_event_type_path(type) %>&nbsp;&nbsp;
+<%= link_to image_tag("admin/delete.png") ,admin_event_type_path(type), method: :delete, data: { confirm: 'Are you sure ?' } %>
+</td>
+</tr>
+ <% i+=1 %>
+<% end %>
+<% if @event_types.empty? %>
+<tr class='rowodd'>
+<td colspan='4' align='center'>No Records Found</td>
+<% end %>
+<% if @event_types.count >10 %>
+<tr class='rowodd pagination'>
+<td colspan='4' align='center'><%= will_paginate @event_types, renderer: BootstrapPagination::Rails %>
+</td>
+<% end %>
+
+</table>

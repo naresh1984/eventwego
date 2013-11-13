@@ -1,0 +1,48 @@
+<table width="100%"><tr><td class="pgtitle">Chnage Password (<%= @user.email %>)</td><td align="right"></td></tr></table>
+<%= form_for @user , :url =>  @user.new_record? ?  new_admin_users_path:  admin_user_path,html: {name:'new_event'}  do |f| %>
+
+ <% if @user.errors.any? %>
+
+<% @user.errors.each do |name, msg| %>
+  <%= content_tag :div, :class => "alert alert-#{name}" do %>
+    <a class="close" data-dismiss="alert" href="#">×</a>
+    <%= "#{name} #{msg}" %>
+  <% end %>
+<% end %>
+
+  <% end %>
+<% if notice %>
+ <%= content_tag :div, :class => "alert alert-#{notice}" do %>
+    <a class="close" data-dismiss="alert" href="#">×</a>
+    <%= notice %>
+  <% end %>
+  <% end %>
+
+			<table class="tabtable1">			
+			
+							
+				<tr>
+					<td width="123" class="fldlable"><%= f.label "New password :" %></td>
+					<td width="309"><%= f.password_field :password, :autocomplete => "off" %></td>				   
+				</tr>
+<tr>
+<td width="123" class="fldlable"><%= f.label "Confirm password :" %></td>
+<td width="309"><%= f.password_field :password_confirmation, :autocomplete => "off" %></td>				   
+				</tr>
+				
+				
+				<tr>
+				<td align="center"></td>
+				    <td align="center">
+				 <%= f.submit "Save",  :class=>'button' %>&nbsp;<%= link_to 'Back', admin_users_path, :class=>"button" %>
+
+</td>
+				 
+				</tr>			
+			</table>
+
+
+<% end %>
+
+
+

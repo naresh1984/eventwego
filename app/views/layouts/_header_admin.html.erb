@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <%= stylesheet_link_tag    "admin/admin", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+<title>EventWeGo:: Detials of Event</title>
+ <script src="http://maps.google.com/maps/api/js?sensor=false"    type="text/javascript"></script>
+</head>
+<body onLoad="initialize();">
+<div id="mainHederWrapper">
+	<div id="logobox"><%= link_to "EventWeGo", admin_path ,:class=>'logotxt' %></div>
+	<div id="accountbox">
+		<span class="welcomeuser"><em>Welcome,</em><%= current_user.email %></span>
+		<span style="float:right"><%= link_to "Logout", destroy_user_session_path, :method => :delete ,:class=>'linkbtn' %></span>
+
+	</div>
+</div>

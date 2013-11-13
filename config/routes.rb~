@@ -1,7 +1,5 @@
 Eventwego::Application.routes.draw do
   resources :event_languages
-
-
   resources :event_types
   resources :uploads 
 
@@ -12,6 +10,27 @@ Eventwego::Application.routes.draw do
        end
      end
   devise_for :users
+
+resources :passwords
+     
+
+ match 'admin' => 'admin#index'
+  namespace :admin do
+     resources :event_types
+     resources :event_languages
+     resources :events do 
+       collection do
+        get 'myevents'
+        get 'eventssigned'
+        get 'status'
+       end
+     end
+     resources :users
+ 
+  end
+
+
+
   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
  
   # The priority is based upon order of creation:

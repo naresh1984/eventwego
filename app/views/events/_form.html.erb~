@@ -70,9 +70,9 @@
                      
                         <td width="15%" valign='top'>
 			
-<%= select_tag(:start_hour,options_for_select((1..12).map {|m|[ m, m]}),:style=>"width:60px;",:class=>'required') %>
-<%= select_minute(Time.now + 6.hours ,{:field_name =>'start_minute',:minute_step => 5},:style=>"width:60px;",:class=>'required') %>
-<%= select_tag(:start_meridiem,options_for_select([['AM', 1], ['PM', 2]]),:style=>"width:60px;",:class=>'required') %>
+<%= select_tag(:start_hour,options_for_select((1..12).map {|m|[ m, m]},params[:start_hour] || @event.start_hour),:style=>"width:60px;",:class=>'required') %>
+<%= select_tag(:start_minute,options_for_select([00,05,10,15,20,25,30,35,40,45,50,55],params[:start_minute] || @event.start_minute),:style=>"width:60px;",:class=>'required') %>
+<%= select_tag(:start_meridiem,options_for_select([['AM', 1], ['PM', 2]],params[:start_meridiem] || @event.start_meridiem),:style=>"width:60px;",:class=>'required') %>
 </td>
                         
                             
@@ -94,9 +94,9 @@
   </td>
                          
                           <td width="15%" valign='top'>
-<%= select_tag(:end_hour,options_for_select((1..12).map {|m|[ m, m]}),:style=>"width:60px;",:class=>'required') %>
-<%= select_minute(Time.now + 6.hours ,{:field_name =>'end_minute',:minute_step => 5},:style=>"width:60px;",:class=>'required') %>
-<%= select_tag(:end_meridiem,options_for_select([['AM', 1], ['PM', 2]]),:style=>"width:60px;",:class=>'required') %>				  </td>
+<%= select_tag(:end_hour,options_for_select((1..12).map {|m|[ m, m]},params[:end_hour] || @event.end_hour),:style=>"width:60px;",:class=>'required') %>
+<%= select_tag(:end_minute,options_for_select([00,05,10,15,20,25,30,35,40,45,50,55],params[:end_minute] || @event.end_minute),:style=>"width:60px;",:class=>'required') %>
+<%= select_tag(:end_meridiem,options_for_select([['AM', 1], ['PM', 2]],params[:end_meridiem] || @event.end_meridiem),:style=>"width:60px;",:class=>'required') %>			  </td>
                        
                          
                  

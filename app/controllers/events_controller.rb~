@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-before_filter :authenticate_user! , :only => [:new,:create,:update]
+before_filter :authenticate_user! , :only => [:new,:create,:update,:edit]
   # GET /events
   # GET /events.json
 =begin  def index
@@ -39,10 +39,18 @@ before_filter :authenticate_user! , :only => [:new,:create,:update]
 
   # GET /events/1/edit
   def edit
-    @event = Event.find(params[:id])  
-    @event.event_language_id=@event.event_language_id.split(",")   
+    @event = Event.find(params[:id])
+
+    if  @event.user_id == current_user.id   
+    @lan=@event.event_language_id.split(",")   
     @EventType = EventType
     @EventLanguage = EventLanguage
+else 
+ respond_to do |format|
+ format.html { redirect_to event_path, notice: 'you are not an authenticated user for this event.' }
+end
+end
+
   end
 
   # POST /events
@@ -62,12 +70,13 @@ before_filter :authenticate_user! , :only => [:new,:create,:update]
      @event.country=  results[0].country
      @event.zipcode=  results[0].postal_code 
      @event.start_hour= params[:start_hour] 
-     @event.start_minute=params[:date][:start_minute]
+     @event.start_minute=params[:start_minute]
      @event.start_meridiem=params[:start_meridiem]
      @event.end_hour= params[:end_hour] 
-     @event.end_minute=params[:date][:end_minute]
+     @event.end_minute=params[:end_minute]
      @event.end_meridiem=params[:end_meridiem]
      @event.user_id=current_user.id
+     @event.status=1
      #Event.uploadfile(params[:event][:avatar])
 
 
@@ -114,10 +123,10 @@ before_filter :authenticate_user! , :only => [:new,:create,:update]
      @event.country=  results[0].country
      @event.zipcode=  results[0].postal_code
      @event.start_hour= params[:start_hour] 
-     @event.start_minute=params[:date][:start_minute]
+     @event.start_minute=params[:start_minute]
      @event.start_meridiem=params[:start_meridiem]
      @event.end_hour= params[:end_hour] 
-     @event.end_minute=params[:date][:end_minute]
+     @event.end_minute=params[:end_minute]
      @event.end_meridiem=params[:end_meridiem] 
 
     respond_to do |format|
@@ -143,23 +152,8 @@ before_filter :authenticate_user! , :only => [:new,:create,:update]
     end
   end
 def myevents 
-     @today_count=today_count()
-     @tomorrow_count=tomorrow_count()
-     @thisweek_count=thisweek_count()
-     @weekend_count=weekend_count()
-     @nextmonth_count=nextmonth_count()
-     @all_events=all_events()
-     @all_types=all_types()
-     @all_location=all_location()
-     @typecount=0  
-     @locount=0 
-     @all_types.each do |ty|
-     @typecount +=ty.counts.to_i
-     end
-     @all_location.each do |ty|
-     @locount +=ty.counts.to_i
-     end
-     @userevents = Event.select('id,name,start_at').where(:user_id=>current_user.id).paginate(:page => params[:page],:per_page => 10) 
+    
+     @userevents = Event.select('id,name,start_at').where("user_id='#{current_user.id}' AND end_at>='#{Date.today.strftime("2000-%m-%d")}'").paginate(:page => params[:page],:per_page => 10) 
      #raise @userevents.inspect
      respond_to do |format|
       format.html #{render html: myevents.html.erb }
@@ -169,23 +163,8 @@ def myevents
 
 end
 def eventssigned 
-     @today_count=today_count()
-     @tomorrow_count=tomorrow_count()
-     @thisweek_count=thisweek_count()
-     @weekend_count=weekend_count()
-     @nextmonth_count=nextmonth_count()
-     @all_events=all_events()
-     @all_types=all_types()
-     @all_location=all_location()
-     @typecount=0  
-     @locount=0 
-     @all_types.each do |ty|
-     @typecount +=ty.counts.to_i
-     end
-     @all_location.each do |ty|
-     @locount +=ty.counts.to_i
-     end
-     @eventssigned = UserSigned.joins(:user,:event).where(:user_id=>current_user.id).paginate(:page => params[:page],:per_page => 10) 
+    
+     @eventssigned = UserSigned.joins(:user,:event).where("events.user_id='#{current_user.id}' AND events.end_at>='#{Date.today.strftime("2000-%m-%d")}'").paginate(:page => params[:page],:per_page => 10) 
      #raise @eventssigned.inspect
   respond_to do |format|
       #format.html { render layout:false } #{render html: eventssigned.html.erb }

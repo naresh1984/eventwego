@@ -1,0 +1,51 @@
+<table width="100%">
+<tr>
+<td class="pgtitle">Users</td>
+<td align="right"></td>
+</tr>
+</table>
+ <% if notice %>
+ <%= content_tag :div, :class => "alert alert-#{notice}" do %>
+    <a class="close" data-dismiss="alert" href="#">×</a>
+    <%= notice %>
+  <% end %>
+  <% end %>
+
+<table class="listtbl" cellpadding="1" cellspacing="1" width="100%" >
+<tr class="header">
+<td width="7%">#</td>
+<td width="57%">Name</td>
+<td width="10%">Events</td>					
+<td width="17%">Action</td>
+</tr>	
+<% i=1 %>
+<% @users.each do |user| %>
+<% rowclass = (i%2==0) ? 'roweven' : 'rowodd' %>
+<tr class="<%= rowclass %>">
+<td align="center"><%= i %></td>
+<td><%= user.email %></td>
+<td width="10%" align='center'>
+
+<%= link_to user.events.event_count, '#' ,:class=>'button1',:style=>"display: block;height:20px;width:20px; border-radius: 17px;",:onclick=>"javascript:void window.open('#{myevents_admin_events_path(:id=>user)}','1348486909895','width=1000,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=120,top=100')" %>
+
+
+<%=  %></td>
+<td align="center">
+<%= link_to image_tag("admin/changepwd.png") ,edit_admin_user_path(user) %>&nbsp;&nbsp;
+<%= link_to image_tag("admin/delete.png") ,admin_user_path(user), method: :delete, data: { confirm: 'Are you sure ?' } %>
+</td>
+</tr>
+ <% i+=1 %>
+<% end %>
+<% if @users.empty? %>
+<tr class='rowodd'>
+<td colspan='4' align='center'>No Records Found</td>
+<% end %>
+<% if @users.count >10 %>
+<tr class='rowodd pagination'>
+<td colspan='4' align='center'><%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+</td>
+<% end %>
+
+</table>
+

@@ -24,8 +24,10 @@
   <% end %>My Events</td></tr>
 <tr>
 <tr><td><div class="underline" style="width:715px;"></div></td></tr>
-			<td style="padding-left:20px;">
+			<td>
+<span  style=' display: block;margin-left: 18px;margin-top: 0px;position: absolute;'>
 			<span <% if controller.action_name =='myevents' %> class="linktabative" <% else %>class="linktab"<% end %>><%= link_to 'Events Created', myevents_events_path(:format=>:js),:remote=>'true' %></span><span <% if controller.action_name =='eventssigned' %> class="linktabative" <% else %>class="linktab"<% end %> ><%= link_to 'Events Signed', eventssigned_events_path(:format=>:js),:remote=>'true'  %></span>
+</span>
 			</td>
 			</tr>
                     <tr>

@@ -1,0 +1,94 @@
+<table id="login" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div class="box1">
+      <table width="500" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="loginhead">LOGIN</td>
+        </tr>
+        <tr>
+          <td><table width="530" border="0" cellspacing="0" cellpadding="0"> 
+            <tr>
+              <td bgcolor="#FFFFFF">
+          <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+
+          <table width="450" border="0" align="center" cellpadding="0" cellspacing="10">
+<% if flash %>
+            <tr>
+            <td>  
+            <br>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, :class => "alert #{name == :error ? "alert-success" : "alert-error" }" do %>
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <%= msg %>
+    <% end %>
+  <% end %> 
+            </td>
+            </tr>
+<% end %>
+
+                  <tr>
+                    <td><%= f.label "Email (or) Mobile" %></td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <label>
+                       
+                        <%= f.email_field :email, :autofocus => true,:size=>'70' %>
+                        </label>
+                  </td>
+                  </tr>
+                  <tr>
+                    <td><%= f.label :password %></td>
+                  </tr>
+                  <tr>
+                    <td><%= f.password_field :password ,:size=>'70'%></td>
+                  </tr>
+                  <tr>
+                    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td width="5%" > <% if devise_mapping.rememberable? -%>
+  <%= f.check_box :remember_me %> 
+  <% end -%></td>
+                          <td width="65%"><%= f.label :remember_me %></td>
+                          <td width="31%" align='right'><%= render "users/shared/links" %></td>
+                        </tr>
+                    </table></td>
+                  </tr>
+                  <tr>
+                    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td width="70%">&nbsp;</td>
+                          <td width="30%">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>&nbsp;</td>
+                          <td><%=  image_submit_tag("login_button.png") %></td>
+                        </tr>
+                    </table></td>
+                  </tr>
+              </table></td>
+            </tr>
+          </table>
+<% end %>
+
+</td>
+        </tr>
+      </table>
+    </div></td>
+    <td><div class="box2" style="height:406px;">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><div style="padding:66px 10px 10px" align="center"><%= link_to image_tag("dont_have_btn.png") ,new_user_registration_path  %></div></td>
+        </tr>
+        <tr>
+          <td class="loginrightlink"><a href="#">Big event coming up?</a><br>
+            Give us a call, we'd love to help. 1-888-541-9753</td>
+        </tr>
+      </table>
+    </div></td>
+  </tr>
+</table>
+
+
+
+

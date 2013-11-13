@@ -27,12 +27,12 @@
       <tr align="left">
         <td colspan="2"  id="serachbg1"><ul>
 
-      <li class="active">All Dates (<%= @all_events %>)</li>
-      <% if @today_count>0 %><li><%= check_box_tag 'dates[today]' , '1', false %><a>Today (<%= @today_count %>)</a></li><% end %>
-      <% if @tomorrow_count>0 %><li><%= check_box_tag 'dates[tomorrow]' , '1', false %><a>Tomorrow (<%= @tomorrow_count %>)</a></li><% end %>
-      <% if @thisweek_count>0 %><li><%= check_box_tag 'dates[thisweek]' , '1', false %><a>This Week (<%= @thisweek_count %>)</a></li><% end %>
-      <% if @weekend_count>0 %><li><%= check_box_tag 'dates[thisweekend]' , '1', false %><a>This Weekend (<%= @weekend_count %>)</a></li><% end %>
-      <% if @nextmonth_count>0 %><li><%= check_box_tag 'dates[nextmonth]' , '1', false %><a>Next Month (<%= @nextmonth_count %>)</a></li><% end %>
+      <li class="active">All Dates (<%= all_events %>)</li>
+      <% if today_count > 0 %><li><%= check_box_tag 'dates[today]' , '1', false %><a>Today (<%= today_count %>)</a></li><% end %>
+      <% if tomorrow_count > 0 %><li><%= check_box_tag 'dates[tomorrow]' , '1', false %><a>Tomorrow (<%= tomorrow_count %>)</a></li><% end %>
+      <% if thisweek_count > 0 %><li><%= check_box_tag 'dates[thisweek]' , '1', false %><a>This Week (<%= thisweek_count %>)</a></li><% end %>
+      <% if weekend_count > 0 %><li><%= check_box_tag 'dates[thisweekend]' , '1', false %><a>This Weekend (<%= weekend_count %>)</a></li><% end %>
+      <% if nextmonth_count > 0 %><li><%= check_box_tag 'dates[nextmonth]' , '1', false %><a>Next Month (<%= nextmonth_count %>)</a></li><% end %>
 
     
     </ul></td>
@@ -49,8 +49,8 @@
       </tr>
       <tr align="left">
         <td colspan="2"  id="serachbg1"><ul>
-          <li class="active">All Types (<%=  @typecount %>)</li>
-         <% @all_types.each do |type| %>
+          <li class="active">All Types (<%=  typecount %>)</li>
+         <% all_types.each do |type| %>
           <li><%= check_box_tag 'types[]' ,  type.event_type.id , false %><a><%= type.event_type.name.capitalize %> (<%= type.counts %>)</a></li>
          <% end %>
         </ul></td>
@@ -65,8 +65,8 @@
       </tr>
       <tr align="left">
         <td colspan="2"  id="serachbg1"><ul>
-            <li class="active">All Dates (<%=  @locount %>)</li>
-           <% @all_location.each do |loc| %>
+            <li class="active">All Dates (<%=  locount %>)</li>
+           <% all_location.each do |loc| %>
           <li><%= check_box_tag 'location[]' , loc.city , false %><a><%= loc.city.capitalize %> (<%= loc.counts %>)</a></li>
           <% end %>
         

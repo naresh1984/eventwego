@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 def index
      
     d = Date.today
-    @search="end_at>='#{d.strftime("%Y-%m-%d")}'"
+    @search="end_at>='#{d.strftime("%Y-%m-%d")}' AND status='1'"
     #@search="(id>0)"
     @empty_seatch=''
     @date_search=''
@@ -115,28 +115,7 @@ if  params[:location].present?
 end
 
 
-     if @empty_seatch.empty?
      
-     @today_count=today_count
-     @tomorrow_count=tomorrow_count
-     @thisweek_count=thisweek_count
-     @weekend_count=weekend_count
-     @nextmonth_count=nextmonth_count
-     @all_events=all_events
-     @all_types=all_types
-     @all_location=all_location    
-     #@typecount= @all_types.map { |h| h[:counts] }.sum
-     #@locount=  @all_location.map { |h| h[:counts] }.sum 
-     @typecount=0  
-     @locount=0 
-     @all_types.each do |ty|
-     @typecount +=ty.counts.to_i
-     end
-     @all_location.each do |ty|
-     @locount +=ty.counts.to_i
-     end
-     
-     end 
      
   if params[:address].present?   
     results = Geocoder.search(params[:address])  

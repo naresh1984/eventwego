@@ -1,10 +1,11 @@
 <%= render 'layouts/header'  %>
 <div id="content">
 
-<div class="searchmiddle" <% if (controller.controller_name!='home' && controller.controller_name!='calendar' &&  controller.action_name !='myevents' &&  controller.action_name !='eventssigned') %>style="background:url('/assets/search_mid1.png');width:992px;"<% end %>>
+<div class="searchmiddle" <% if (controller.controller_name!='home' && controller.controller_name!='calendar' &&  controller.action_name !='myevents' &&  controller.action_name !='eventssigned' && controller.controller_name!='registrations') %>style="background:url('/assets/search_mid1.png');width:992px;"<% end %>>
+
 <%= yield %>
 </div>
-<div class="searchbottom" <% if controller.controller_name!='home' && controller.controller_name!='calendar' &&  controller.action_name !='myevents' &&  controller.action_name !='eventssigned'  %>style="background:url('/assets/search_botm1.png');width:992px;"<% end %>></div>
+<div class="searchbottom" <% if controller.controller_name!='home' && controller.controller_name!='calendar' &&  controller.action_name !='myevents' &&  controller.action_name !='eventssigned' && controller.controller_name!='registrations'  %>style="background:url('/assets/search_botm1.png');width:992px;"<% end %>></div>
 
 </div>
 

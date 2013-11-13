@@ -1,0 +1,82 @@
+<table width="100%" border="0">
+  <tr>
+  		<td width="23%" valign="top">
+<%= form_tag root_path ,:remote=>'true',:id=>'checkbox',:name=>'checkbox' do |f| %>
+			<%= render 'layouts/left'  %>
+<% end %>
+		</td>
+		<td width="77%" valign="top" >
+
+
+
+ <div id='home' >
+<table width="97%" class='listtbl' border="0" style="margin:0;">
+ <tr>
+<td align="left" class="searchhead2" style="padding-left:30px" ><% flash.each do |name, msg| %>
+    <%= content_tag :div, :class => "alert #{name == :error ? "alert-error" : "alert-success" }" do %>
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <%= msg %>
+    <% end %>
+  <% end %>change password</td></tr>
+<tr>
+<tr><td><div class="underline" style="width:715px;"></div></td></tr>
+                    <tr>
+                    <td > 
+<% if flash.count>0 %>
+<table width="99%">
+<tr>
+<td>
+<% flash.each do |name, msg| %>
+    <%= content_tag :div, :class => "alert #{name == :error ? "alert-error" : "alert-success" }" do %>
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <%= msg %>
+    <% end %>
+  <% end %>
+</td>
+</tr>
+</table>
+  <% end %>
+
+<%= form_for @user , :url =>  @user.new_record? ? admin_events_path: password_path,html: {name:'new_event'}  do |f| %>
+<table width='100%' border='0'>
+
+
+<tr>
+<td> <div><%= f.label "Current password :" %></td>
+ <td><%= f.password_field :current_password %></td>
+</tr> 
+
+
+<tr>
+<td> <div><%= f.label "New password :" %></td>
+ <td><%= f.password_field :password, :autocomplete => "off" %></td>
+</tr> 
+<tr>
+<td> <div><%= f.label "Confirm password :" %></td>
+ <td><%= f.password_field :password_confirmation %></td>
+</tr> 
+
+<tr>
+<td></td>
+ <td><%= f.submit "Update" ,:class=>'button' %></td>
+</tr> 
+
+ 
+</table>
+<% end %>
+</td>
+ </tr>
+</table></div>
+</td>					
+</tr>
+</table>  
+<script>
+$(document).ready(function() {
+    $('.pagination a').attr('data-remote', 'true');
+});
+$('input:checkbox').click(function(e){
+
+  $(this).closest('form').submit();
+});
+
+</script>

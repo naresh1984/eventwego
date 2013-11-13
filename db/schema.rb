@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105064449) do
+ActiveRecord::Schema.define(:version => 20131107094747) do
 
   create_table "event_languages", :force => true do |t|
     t.string   "name"
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(:version => 20131105064449) do
     t.string   "name"
     t.date     "start_at"
     t.date     "end_at"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "start_hour"
     t.string   "start_minute"
     t.string   "start_meridiem"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20131105064449) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "status",              :default => 0
   end
 
   create_table "profiles", :force => true do |t|

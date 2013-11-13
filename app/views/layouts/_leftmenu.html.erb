@@ -1,0 +1,9 @@
+<div class="leftblock">
+<%= link_to "Events", admin_events_path,:class => controller.controller_name == 'events' ? "active" : "" %>
+<%= link_to "Users", admin_users_path,:class => controller.controller_name == 'users' && controller.action_name =='index' ? "active" : ""%>
+<%= link_to "Event Types", admin_event_types_path, :class => controller.controller_name == 'event_types' ? "active" : ""%>
+<%= link_to "Languages", admin_event_languages_path, :class => controller.controller_name == 'event_languages' ? "active" : ""%>
+<%= link_to "Change Password", edit_admin_user_path(current_user.id), :class => controller.controller_name == 'users' && controller.action_name =='edit' ? "active" : ""%>
+<%= link_to "Logout", destroy_user_session_path, :method => :delete  %>
+
+</div>
