@@ -175,7 +175,7 @@ end
 end
 
 
-     @userevents = Event.select('id,name,start_at,status,user_id').where("user_id='#{current_user.id}' AND end_at>='#{Date.today.strftime("2000-%m-%d")}'").paginate(:page => params[:page],:per_page => 10)
+     @userevents = Event.select('id,name,start_at,status,user_id').where("user_id='#{params[:id]}' AND end_at>='#{Date.today.strftime("2000-%m-%d")}'").paginate(:page => params[:page],:per_page => 10)
 
      @user=User.find(params[:id]); 
      #raise @userevents.inspect
