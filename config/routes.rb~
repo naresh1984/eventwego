@@ -11,9 +11,6 @@ Eventwego::Application.routes.draw do
      end
   devise_for :users
 
-resources :passwords
-     
-
  match 'admin' => 'admin#index'
   namespace :admin do
      resources :event_types
