@@ -1,8 +1,8 @@
-<%= form_tag @home ,:remote=>'true',:id=>'checkbox',:name=>'checkbox' do |f| %>
+<%= form_tag @home ,:remote=>'true',:id=>'checkbox',:name=>'checkbox' do |f| %>	
 <table width="100%" border="0">
   <tr>
   		<td width="23%" valign="top">
-			<%= render 'layouts/left'  %>
+		<%= render 'layouts/left'  %> 
 		</td>
 		<td width="77%" valign="top">
 <% if flash.count>0 %>
@@ -18,8 +18,7 @@
 </td>
 </tr>
 </table>
-  <% end %>
-
+ <% end %>
 <div id="serachbg">
           <table width="97%" border="0" style="padding-top:20px">
             <tr>
@@ -38,7 +37,8 @@
           </table>
 
 
-        </div>  <div id='home'>
+        </div> 
+ <div id='home'>
                 <%= render 'layouts/right'  %> <div>			
 		</td>	
   </tr>
@@ -51,41 +51,6 @@ $(document).ready(function() {
     $('.pagination a').attr('data-remote', 'true');
 });</script>
 
-<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
-    <script>
-      function initialize() {
-        var mapOptions = {
-          center: new google.maps.LatLng(-33.8688, 151.2195),
-          zoom: 13,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };        
 
-        var input = document.getElementById('addresspicker_map');
-        var autocomplete = new google.maps.places.Autocomplete(input);
-		
-        // Sets a listener on a radio button to change the filter type on Places
-        // Autocomplete.
-        function setupClickListener(id, types) { 
-          var radioButton = document.getElementById(id);
-          google.maps.event.addDomListener(radioButton, 'click', function() {
-            autocomplete.setTypes(types);
-          });
-        }
-
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-
-  $(function() {
-     $("form").bind("ajax:beforeSend", function(){
-        $("#spinner_question").show();
-       })
-       $("form").bind("ajax:complete", function(){
-         $("#spinner_question").hide();
-      })
-     });
-$('input:checkbox').click(function(e){
-  $(this).closest('form').submit();
-});
-    </script>
 
 

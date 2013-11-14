@@ -5,7 +5,17 @@
  <script src="http://maps.google.com/maps/api/js?sensor=false"    type="text/javascript"></script>
 </head>
 <body>
-<div><a href="?act=change&id=9228&status=1" title="Change Status" style=" float:right; margin-right:150px; margin-top:10px;" ><img src="images/deactivate.png" title="deactivate" alt="deactivate"  /></a></div>
+<div>
+
+<% if @event.status==1 %>
+<%= link_to image_tag('admin/deactivate.png'),admin_event_path(:id=>params[:id],:status=>@event.status),:style=>"float:right; margin-right:150px; margin-top:10px;" %>
+<% else %>
+<%= link_to image_tag('admin/activate.png'),admin_event_path(:id=>params[:id],:status=>@event.status),:style=>"float:right; margin-right:150px; margin-top:10px;" %>
+<% end %>
+
+
+
+</div>
 <div id="content"  style="background:none; margin-top:20px;">
 <div class="logintop"></div>
 

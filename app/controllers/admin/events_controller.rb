@@ -15,9 +15,23 @@ end
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
+
+
+if params[:status] == "1"
+@event.status= 0
+else
+@event.status= 1
+end
+
+if @event.status!=''
+ @event.update_attributes(params[:event])
+end
+
+
+
+
     event_language_id=@event.event_language_id.split(",") 
-    @EventLanguage = EventLanguage.select('name').find(event_language_id)
-   
+    @EventLanguage = EventLanguage.select('name').find(event_language_id)   
     respond_to do |format|
       format.html {render layout:false}# show.html.erb
       format.json { render json: @event }
@@ -169,8 +183,6 @@ if params[:status] == "1"
 else
 @event.status= 1
 end
-
-
  @event.update_attributes(params[:event])
 end
 
