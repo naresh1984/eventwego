@@ -13,10 +13,7 @@ class User < ActiveRecord::Base
  has_many :user_signed, :dependent => :destroy
  accepts_nested_attributes_for :profile
 
-def self.all_events
 
-return all_events();
-end
 
 
 

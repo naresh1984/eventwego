@@ -414,3 +414,15 @@ margin-top:6px;
 .linktab a {
   color:#FFFFFF;
 }
+.button {
+  background-image:url("add_btn.gif");
+  background-position:initial initial;
+  background-repeat:repeat no-repeat;
+  color:#FFFFFF;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:bold;
+  height:29px;
+}
+
+

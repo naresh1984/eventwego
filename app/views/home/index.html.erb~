@@ -46,6 +46,24 @@
 </table>
 <% end %>
 
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+<script type="text/javascript">
+function initialize() {
+    var input = document.getElementById('addresspicker_map');
+    var options = {componentRestrictions: {country: 'us'}};
+                 
+    new google.maps.places.Autocomplete(input);
+}
+             
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<script>
+$('input:checkbox').click(function(e){
+  $(this).closest('form').submit();
+  
+});
+</script>
+
 <script>
 $(document).ready(function() {
     $('.pagination a').attr('data-remote', 'true');

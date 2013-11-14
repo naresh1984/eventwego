@@ -1,4 +1,7 @@
+$("html, body").animate({ scrollTop: 0 }, 600);
 $("#home").html("<%= escape_javascript(render(:partial =>
 "index")) %>");
  $('.pagination a').attr('data-remote', 'true');
  initialize();
+
+
