@@ -1,7 +1,9 @@
 class HomeController < ApplicationController
 
 def index
-     
+if current_user
+api()
+end
     d = Date.today
     @search="end_at>='#{d.strftime("%Y-%m-%d")}' AND status='1'"
     #@search="(id>0)"

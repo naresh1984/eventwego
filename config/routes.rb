@@ -9,7 +9,8 @@ Eventwego::Application.routes.draw do
         get 'eventssigned'
        end
      end
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
+
 
  match 'admin' => 'admin#index'
   namespace :admin do

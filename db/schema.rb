@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131107094747) do
+ActiveRecord::Schema.define(:version => 20131118094101) do
 
   create_table "event_languages", :force => true do |t|
     t.string   "name"
@@ -112,6 +112,10 @@ ActiveRecord::Schema.define(:version => 20131107094747) do
     t.string   "unconfirmed_email"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "uid",                    :default => 0
+    t.string   "provider"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

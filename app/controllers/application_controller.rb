@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
  helper_method :all_location
  helper_method :typecount
  helper_method :locount
+ helper_method :api
 
  #raise @today_count.inspect
  def all_events
@@ -83,7 +84,11 @@ return @locount if defined?(@locount)
 raise @locount.inspect
 end
 
-    
+def api
+
+
+
+end
 
 
 

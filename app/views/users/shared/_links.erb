@@ -7,8 +7,4 @@
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name),:style=>"color:#666666;" %><br />
 <% end -%>
 
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider),:style=>"color:#666666;" %><br />
-  <% end -%>
-<% end -%>
+

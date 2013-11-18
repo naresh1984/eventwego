@@ -24,9 +24,10 @@
   <% end %> 
             </td>
             </tr>
-<% end %>
-
-                  <tr>
+<% end %><tr>
+         <td align='center'><%= render "layouts/api" %></td>
+         </tr>
+<tr>
                     <td><%= f.label "Email (or) Mobile" %></td>
                   </tr>
                   <tr>

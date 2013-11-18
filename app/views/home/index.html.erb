@@ -67,6 +67,9 @@ $('input:checkbox').click(function(e){
 <script>
 $(document).ready(function() {
     $('.pagination a').attr('data-remote', 'true');
+<% if @current_user == '' %>
+FB.logout();
+<% end %>
 });</script>
 
 

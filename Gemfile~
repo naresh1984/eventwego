@@ -29,6 +29,8 @@ end
 
 gem 'jquery-rails'
 gem 'devise'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
 gem "thin"
 gem "nested_form"
 gem 'event-calendar', :require => 'event_calendar'
