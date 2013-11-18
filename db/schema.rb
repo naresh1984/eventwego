@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118094101) do
+ActiveRecord::Schema.define(:version => 20131118122747) do
 
   create_table "event_languages", :force => true do |t|
     t.string   "name"
@@ -96,12 +96,12 @@ ActiveRecord::Schema.define(:version => 20131118094101) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                                                 :default => "", :null => false
+    t.string   "encrypted_password",                                    :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0,  :null => false
+    t.integer  "sign_in_count",                                         :default => 0,  :null => false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -110,9 +110,9 @@ ActiveRecord::Schema.define(:version => 20131118094101) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.integer  "uid",                    :default => 0
+    t.datetime "created_at",                                                            :null => false
+    t.datetime "updated_at",                                                            :null => false
+    t.decimal  "uid",                    :precision => 10, :scale => 0, :default => 0
     t.string   "provider"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
