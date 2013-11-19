@@ -21,7 +21,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     signed.save(:validate => false)
     flash.notice = "Signed in Through Google!"
     #sign_up(resource_name, user)
-    #send_admin_mail(user)
+    #send_admin_mail(user) 
+    CustomMailer.welcome_email(user).deliver  
     sign_in_and_redirect user
     end
   end
@@ -46,6 +47,7 @@ def facebook
     flash.notice = "Signed in Through facebook!"
     #sign_up(resource_name, user)
     #send_admin_mail(user)
+    CustomMailer.welcome_email(user).deliver  
     sign_in_and_redirect user
     end
   end

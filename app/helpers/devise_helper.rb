@@ -19,7 +19,7 @@ module DeviseHelper
                                  :resource => resource.class.model_name.human.downcase)
 
     html = <<-HTML
-    <div id="error_explanation" class = "alert alert-error">
+    <div id="error_explanation" class = "alert #{resource.errors.empty? == false ? "alert-error" : "alert-success" }">
       <a class="close" data-dismiss="alert" href="#" style="font-size:13px;">&#967;</a>      
       <ul>#{messages}</ul>
      
