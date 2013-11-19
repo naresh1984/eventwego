@@ -5,15 +5,16 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash.notice = "Signed in Through Google!"
       @user=User.find(user.id)
       @user.provider=user.provider
-      @user.uid=user.uid
+      #@user.uid=user.uid
       @user.update_attributes(params[:user]) 
-      @user.oauth_token = user.oauth_token
-      @user.oauth_expires_at = user.oauth_expires_at    
+      #@user.oauth_token = user.oauth_token
+      #@user.oauth_expires_at = user.oauth_expires_at    
       sign_in_and_redirect user
     else
     pass=rand(10 ** 10)
     #raise pass.inspect;
-    user = User.new(:email => user.email,:password => pass ,:provider => user.provider,:uid => user.uid,:oauth_token => user.oauth_token,:oauth_expires_at => user.oauth_expires_at) 
+    #:uid => user.uid,:oauth_token => user.oauth_token,:oauth_expires_at => user.oauth_expires_at
+    user = User.new(:email => user.email,:password => pass ,:provider => user.provider) 
     user.skip_confirmation!
     user.save(:validate => false)
     signed = Profile.new(:user_id => user.id)
@@ -31,13 +32,13 @@ def facebook
       flash.notice = "Signed in Through facebook!"
       @user=User.find(user.id)
       @user.provider=user.provider
-      @user.uid=user.uid
+      #@user.uid=user.uid
       @user.update_attributes(params[:user]) 
       sign_in_and_redirect user
     else
     pass=rand(10 ** 10)
-    #raise pass.inspect;
-    user = User.new(:email => user.email,:password => pass ,:provider => user.provider,:uid => user.uid) 
+    #raise pass.inspect; ,:uid => user.uid
+    user = User.new(:email => user.email,:password => pass ,:provider => user.provider) 
     user.skip_confirmation!
     user.save(:validate => false)
     signed = Profile.new(:user_id => user.id)
