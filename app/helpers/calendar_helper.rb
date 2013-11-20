@@ -289,9 +289,9 @@ cal << %(</th>)
 		 cal << %(<td colspan="#{day_calls}">&nbsp;</td>)              
                 
                  end
-                 cal << %(<td><a href="#{root_path}events/#{event.id}" title="#{(event.name)}">&nbsp;&nbsp;#{event.name.capitalize}</a></td>)
+                 cal << %(<td><a href="#{root_path}events/#{event.id}" title="#{(event.name)}">&nbsp;&nbsp;#{truncate(event.name.capitalize,length: 15)}</a></td>)
                 else
-                cal << %(<td><a href="#{root_path}events/#{event.id}" title="#{event.name}" >&nbsp;&nbsp;#{event.name.capitalize}</a></td>)             
+                cal << %(<td><a href="#{root_path}events/#{event.id}" title="#{event.name}" >&nbsp;&nbsp;#{truncate(event.name.capitalize,length: 15)}</a></td>)             
                 end
                 # add a right arrow if event is clipped at the end
                 day_day=dates[1].strftime("%d").to_i
