@@ -46,11 +46,43 @@
     # For example usage, see README.
     #
  def pre_link(month_date)
-    link_to( image_tag('leftArrow.gif') , {:month => month_date.month, :year => month_date.year},:remote=>'true')
+ @y=month_date.year
+
+link_to_if(2013 <=@y, image_tag('leftArrow.gif'), { :month => month_date.month, :year => month_date.year },:remote=>'true') do
+ end
+
   end
  def next_link(month_date)
-    link_to( image_tag('rightArrow.gif'), {:month => month_date.month, :year => month_date.year},:remote=>'true')
-  end
+    @event_end=Event.select('end_at').where("status='1'").order('end_at DESC').limit(1)     
+    @event_end=@event_end[0].end_at.strftime("%Y").to_i  
+    @y=month_date.year
+    
+link_to_if(@y <= @event_end , image_tag('rightArrow.gif'), { :month => month_date.month, :year => month_date.year },:remote=>'true') do
+ end
+end
+
+def ms
+d = Date.today  
+  content_tag(:span,select_tag(:month, options_for_select((1..12).map {|m| [Date::MONTHNAMES[m], m]}, params[:month] || d.strftime("%m")),:style=>'width:105px;outline:none;padding:0px;height: 22px;margin-left:47px;'))
+
+end
+
+def ys
+d = Date.today  
+    #@event_start=Event.select('start_at').where("status='1'").order('start_at ASC').limit(1)  
+    @event_end=Event.select('end_at').where("status='1'").order('end_at DESC').limit(1)     
+    @event_end=@event_end[0].end_at.strftime("%Y").to_i
+    #raise @event_start.inspect
+  content_tag :span, :style=>'margin-left:5px;' do  select_tag(:year, options_for_select((2013..@event_end).map {|m| [m, m]},params[:year] ||d.strftime("%Y")),:style=>'width:75px;outline:none;padding:0px;height: 22px;')
+
+ end
+  
+
+end
+def yss
+content_tag :span, :style=>'margin-left:5px;' do  submit_tag "Go", :class => "button" ,:style=>"height:21px;font-size: 11px;position: absolute;"  end
+end
+
 
     def calendar(options = {}, &block)
       block ||= Proc.new {|d| nil}
@@ -116,8 +148,13 @@
         day_names.push(day_names.shift)
       end
 
+
       # Build the HTML string
       cal = ""
+      my = ""
+      #ms = ""
+      d = Date.today 
+
 
       # outer calendar container
       cal << %(<div class="ec-calendar")
@@ -133,13 +170,39 @@
           #{options[:previous_month_text]} #{options[:next_month_text]} <span class='date_header'>#{options[:month_name_text]}</span></th>)
           colspan = 3
         else
-          colspan = 7
+          colspan = 6
         end
         cal << %(<th colspan="#{colspan}" class="ec-month-name"></th>)
-        if options[:next_month_text]
-          cal << %(<th colspan="2" class="ec-month-nav ec-next-month"></th>)
-        end
+
+
+
+
+
+
+       
+          cal << %(<th colspan="3" class="ec-month-nav ec-next-month">)
+
+cal << (form_for  calendar_path , :method => :get ,:remote=>"true" do 
+
+my << (ms)
+my << (ys)
+my << (yss)
+raw(my)
+end )
+
+
+
+cal << %(</th>)
+        
         cal << %(</tr></thead></table>)
+
+
+
+
+
+ 
+
+
       end
 
       # body container (holds day names and the calendar rows)
@@ -199,87 +262,53 @@
           cal << %(</td>)
         end
         cal << %(</tr>)
+          options[:event_strips].each do |strip|
 
-        # event rows for this day
-        # for each event strip, create a new table row
-        options[:event_strips].each do |strip|
-          cal << %(<tr>)
-          # go through through the strip, for the entries that correspond to the days of this week
-          strip[row_num*7, 7].each_with_index do |event, index|
-            day = first_day_of_week + index
+         strip[row_num*7, 7].each_with_index do |event, index|
 
-            if event
-              # get the dates of this event that fit into this week
-              dates = event.clip_range(first_day_of_week, last_day_of_week)
-              # if the event (after it has been clipped) starts on this date,
-              # then create a new cell that spans the number of days
-              if dates[0] == day.to_date
-                # check if we should display the bg color or not
-                no_bg = no_event_bg?(event, options)
-                class_name = event.class.name.tableize.singularize
-
-                cal << %(<td class="ec-event-cell" colspan="#{(dates[1]-dates[0]).to_i + 1}" )
-                cal << %(style="padding-top: #{options[:event_margin]}px;">)
-                cal << %(<div id="ec-#{class_name}-#{event.id}" class="ec-event )
-                if class_name != "event"
-                  cal << %(ec-#{class_name} )
-                end
-                if no_bg
-                  cal << %(ec-event-no-bg" )
-                  cal << %(style="color: #{event.color}; )
+         
+         day = first_day_of_week + index
+         if event
+         dates = event.clip_range(first_day_of_week, last_day_of_week)
+         day_calls=(day.to_date.strftime("%d").to_i-event.start_at.strftime("%d").to_i).to_i 
+          
+          #raise dates[1].inspect
+	         num_val=7-((dates[1]-dates[0]).to_i + 1 )                
+                 #raise ((dates[1]-dates[0]).to_i + 1 ).inspect
+               if dates[0] == day.to_date                  
+                 cal << %(<tr>)
+                 if num_val>0 && ((dates[1]-dates[0]).to_i + 1 )>1  && event.end_at<day.to_date
+		 cal << %(<td colspan="#{num_val}">&nbsp;</td> )
+                 elsif (day.to_date==event.start_at)
+                 week_start=beginning_of_week(event.start_at)
+                 e_start=event.start_at
+                 day_calls=((e_start-week_start)).to_i 
+                
+               
+                 # raise event.start_at.strftime("%d").to_i.inspect                  
+		 cal << %(<td colspan="#{day_calls}">&nbsp;</td>)              
+                
+                 end
+                 cal << %(<td><a href="#{root_path}events/#{event.id}" title="#{(event.name)}">&nbsp;&nbsp;#{event.name.capitalize}</a></td>)
                 else
-                  cal << %(ec-event-bg" )
-                  cal << %(style="background-color: #{event.color}; )
-                end
-
-                cal << %(padding-top: #{options[:event_padding_top]}px; )
-                cal << %(height: #{options[:event_height] - options[:event_padding_top]}px;" )
-                if options[:use_javascript]
-                  # custom attributes needed for javascript event highlighting
-                  cal << %(data-event-id="#{event.id}" data-event-class="#{class_name}" data-color="#{event.color}" )
-                end
-                cal << %(>)
-
-                # add a left arrow if event is clipped at the beginning
-                if event.start_at.to_date < dates[0]
-                  cal << %(<div class="ec-left-arrow"></div>)
+                cal << %(<td><a href="#{root_path}events/#{event.id}" title="#{event.name}" >&nbsp;&nbsp;#{event.name.capitalize}</a></td>)             
                 end
                 # add a right arrow if event is clipped at the end
-                if event.end_at.to_date > dates[1]
-                  cal << %(<div class="ec-right-arrow"></div>)
+                day_day=dates[1].strftime("%d").to_i
+                if day_day == day.day                   
+                   cal << %(</tr>)
                 end
 
-                if no_bg
-                  cal << %(<div class="ec-bullet" style="background-color: #{event.color};"></div>)
-                  # make sure anchor text is the event color
-                  # here b/c CSS 'inherit' color doesn't work in all browsers
-                  cal << %(<style type="text/css">.ec-#{class_name}-#{event.id} a { color: #{event.color}; }</style>)
-                end
 
-                if block_given?
-                  # add the additional html that was passed as a block to this helper
-                  cal << block.call({:event => event, :day => day.to_date, :options => options})
-                else
-                  # default content in case nothing is passed in
-                  cal << %(<a href="/#{class_name.pluralize}/#{event.id}" title="#{h(event.name)}">#{h(event.name)}</a>)
-                end
-
-                cal << %(</div></td>)
-              end
-
-            else
-              # there wasn't an event, so create an empty cell and container
-              cal << %(<td class="ec-event-cell ec-no-event-cell" )
-              cal << %(style="padding-top: #{options[:event_margin]}px;">)
-              cal << %(<div class="ec-event" )
-              cal << %(style="padding-top: #{options[:event_padding_top]}px; )
-              cal << %(height: #{options[:event_height] - options[:event_padding_top]}px;" )
-              cal << %(>)
-              cal << %(&nbsp;</div></td>)
-            end
-          end
-          cal << %(</tr>)
-        end
+		 
+         end
+        
+         end
+         end
+        
+        # event rows for this day
+        # for each event strip, create a new table row
+        
 
         cal << %(</tbody></table>)
         cal << %(</div>)
