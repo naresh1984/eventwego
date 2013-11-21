@@ -309,7 +309,7 @@ cal << %(</th>)
                 
                  end
                  
-                cal << %(</td>)
+                cal << %(</td>) 
                
               end
               
