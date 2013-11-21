@@ -287,7 +287,7 @@ cal << %(</th>)
                 # check if we should display the bg color or not
                 no_bg = no_event_bg?(event, options)
                 class_name = event.class.name.tableize.singularize
-                num_rows =(dates[1]-dates[0]).to_i + 1 
+                num_rows =(dates[1]-dates[0]).to_i + 1                
                 (1..num_rows).each do |i|  
                 cal << %(<td class="ec-event-cell" )
                 cal << %(style="padding-top: #{options[:event_margin]}px;padding-right: #{options[:events_padding_right]}px;">)
@@ -305,8 +305,10 @@ cal << %(</th>)
                   cal << block.call({:event => event, :day => day.to_date, :options => options})
                 else
                   # default content in case nothing is passed in
-                  cal << %(<a href="/#{class_name.pluralize}/#{event.id}" title="#{h(event.name)}" style="color:#2272AF;">#{j}#{")&nbsp"}#{h(truncate(event.name.capitalize,length: 12))}#{j}</a>)
-                
+                  cal << %(<a href="/#{class_name.pluralize}/#{event.id}" title="#{h(event.name)}" style="color:#2272AF;">)
+                  cal << %(#{h(j)}#{")&nbsp;"})
+                  cal << %(#{h(truncate(event.name.capitalize,length: 12))}</a>)
+                  
                  end
                  
                 cal << %(</td>) 
@@ -329,6 +331,7 @@ cal << %(</th>)
           end
           cal << %(</tr>)
            j+=1
+ #raise j.inspect
         end
 
 
