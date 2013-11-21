@@ -305,7 +305,7 @@ cal << %(</th>)
                   cal << block.call({:event => event, :day => day.to_date, :options => options})
                 else
                   # default content in case nothing is passed in
-                  cal << %(<a href="/#{class_name.pluralize}/#{event.id}" title="#{h(event.name)}" style="color:#2272AF;">#{j}#{")&nbsp"}#{h(truncate(event.name.capitalize,length: 12))}</a>)
+                  cal << %(<a href="/#{class_name.pluralize}/#{event.id}" title="#{h(event.name)}" style="color:#2272AF;">#{j}#{")&nbsp"}#{h(truncate(event.name.capitalize,length: 12))}#{j}</a>)
                 
                  end
                  
