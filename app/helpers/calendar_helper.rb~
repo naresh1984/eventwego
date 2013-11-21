@@ -60,7 +60,6 @@ link_to_if(2013 <=@y, image_tag('leftArrow.gif'), { :month => month_date.month, 
 link_to_if(@y <= @event_end , image_tag('rightArrow.gif'), { :month => month_date.month, :year => month_date.year },:remote=>'true') do
  end
 end
-
 def ms
 d = Date.today  
   content_tag(:span,select_tag(:month, options_for_select((1..12).map {|m| [Date::MONTHNAMES[m], m]}, params[:month] || d.strftime("%m")),:style=>'width:105px;outline:none;padding:0px;height: 22px;margin-left:47px;'))
@@ -270,7 +269,7 @@ cal << %(</th>)
 
 # event rows for this day
         # for each event strip, create a new table row
-         j=1 
+          
         options[:event_strips].each do |strip|
           cal << %(<tr>)
           # go through through the strip, for the entries that correspond to the days of this week
@@ -279,6 +278,7 @@ cal << %(</th>)
             day = first_day_of_week + index
             
             if event
+              
               # get the dates of this event that fit into this week
               dates = event.clip_range(first_day_of_week, last_day_of_week)
               # if the event (after it has been clipped) starts on this date,
@@ -287,8 +287,10 @@ cal << %(</th>)
                 # check if we should display the bg color or not
                 no_bg = no_event_bg?(event, options)
                 class_name = event.class.name.tableize.singularize
+               
                 num_rows =(dates[1]-dates[0]).to_i + 1                
-                (1..num_rows).each do |i|  
+                (1..num_rows).each do |i| 
+               
                 cal << %(<td class="ec-event-cell" )
                 cal << %(style="padding-top: #{options[:event_margin]}px;padding-right: #{options[:events_padding_right]}px;">)
                 
@@ -305,20 +307,21 @@ cal << %(</th>)
                   cal << block.call({:event => event, :day => day.to_date, :options => options})
                 else
                   # default content in case nothing is passed in
-                  cal << %(<a href="/#{class_name.pluralize}/#{event.id}" title="#{h(event.name)}" style="color:#2272AF;">)
-                  cal << %(#{h(j)}#{")&nbsp;"})
+                  cal << %(<a href="/#{class_name.pluralize}/#{event.id}" title="#{h(event.name)}" style="color:#444444;font-size: 13px;
+    padding: 2px;">)                
+                  cal << image_tag("arrow3_e.gif")
                   cal << %(#{h(truncate(event.name.capitalize,length: 12))}</a>)
                   
                  end
-                 
+                
                 cal << %(</td>) 
                
               end
               
-              end
-
-            else
-              # there wasn't an event, so create an empty cell and container
+          
+              end              
+              else    
+              # there wasn't an event, so create an empty cell and container             
               cal << %(<td class="ec-event-cell ec-no-event-cell" )
               cal << %(style="padding-top: #{options[:event_margin]}px;">)
               cal << %(<div class="ec-event" )
@@ -326,12 +329,17 @@ cal << %(</th>)
               cal << %(height: #{options[:event_height] - options[:event_padding_top]}px;" )
               cal << %(>)
               cal << %(&nbsp;</div></td>)
+             
             end
             
           end
-          cal << %(</tr>)
-           j+=1
- #raise j.inspect
+          cal << %(</tr>)    
+          
+           
+          
+       
+
+
         end
 
 
