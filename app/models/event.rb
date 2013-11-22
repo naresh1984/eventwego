@@ -12,7 +12,6 @@ attr_accessible :start_at, :end_at, :name ,:content,:venue,:address,:furl,:turl,
   has_many :user_signed , :dependent => :destroy  
   geocoded_by :address
 
-
 def self.event_count
 where("end_at>='#{Date.today.strftime("2000-%m-%d")}'").count
 end
