@@ -18,6 +18,8 @@ module Eventwego
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
 
+    #config.autoload_paths += %W(#{config.root}/uploads)
+
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
@@ -41,9 +43,7 @@ module Eventwego
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
-
-    config.autoload_paths += %W(/uploads)
-    config.autoload_paths += Dir["/uploads/**/"]
+     config.autoload_paths += Dir[Rails.root.join('app', 'views', '{**}')]
 
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,
@@ -61,9 +61,9 @@ module Eventwego
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-
+    #config.load_paths << "#{Rails.root}/uploads"
 
     config.assets.initialize_on_precompile = true
-
+    
   end
 end

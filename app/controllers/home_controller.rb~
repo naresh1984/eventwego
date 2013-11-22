@@ -142,4 +142,17 @@ respond_to do |format|
 
  end
 
+def asset
+    instance = Event.find(params[:id])
+
+    #raise instance.inspect
+    params[:style].gsub!(/\.\./, '')
+    #check permissions before delivering asset?\
+    #raise instance.avatar.path(params[:style].intern).inspect
+    send_file instance.avatar.path(params[:style].intern),
+              :type => instance.avatar_content_type,
+              :disposition => 'inline'
+  end
+
+
 end
