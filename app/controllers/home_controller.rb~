@@ -136,6 +136,7 @@ end
 respond_to do |format|
       format.html #{render html: myevents.html.erb }
       #format.json { render json: @userevents }
+      #format.js { render layout:false }
       format.js { render layout:false }
     end
 

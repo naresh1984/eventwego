@@ -70,7 +70,22 @@ $(document).ready(function() {
 <% if @current_user == '' %>
 FB.logout();
 <% end %>
-});</script>
+});
+
+$(window).endlessScroll();
+// using some custom options
+$("#home").endlessScroll({
+  fireOnce: false,
+  fireDelay: false,
+  loader: '<div class="loading"><div>',
+  callback: function(p){
+    alert("test");
+  }
+});
+
+
+
+</script>
 
 
 

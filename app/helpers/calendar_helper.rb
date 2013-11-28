@@ -411,17 +411,18 @@ cal << %(</th>)
           num_events = strip_num + 1 unless strip[index-1].blank?
         end
         # get the most event rows for this week
-        num_event_rows = [num_event_rows, num_events].max
+        num_event_rows = [num_event_rows, num_events].max        
         # if we reached the end of the week, calculate this row's height
         if index % 7 == 0
           total_event_height = options[:event_height] + options[:event_margin]
-          calc_row_height = (num_event_rows * total_event_height) + options[:day_nums_height] + options[:event_margin]
+          calc_row_height = ((num_event_rows * total_event_height)*1.2) + options[:day_nums_height]+options[:event_margin]
           row_height = [min_height, calc_row_height].max
           row_heights << row_height
           num_event_rows = 0
         end
       end
       row_heights
+
     end
 
     #

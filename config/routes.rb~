@@ -34,7 +34,7 @@ Eventwego::Application.routes.draw do
  # match "/uploads/system/events/images/:id/small/:filename"
  match 'uploads/system/events/images/:id/:style/:filename', :to => 'home#asset'
 
-
+  match "*path" => redirect("/")
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
